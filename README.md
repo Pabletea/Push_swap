@@ -42,5 +42,34 @@ Este proyecto se desarrolla como parte del currículo de la escuela 42, y pone a
 
 Para compilar el proyecto, simplemente ejecuta el comando:
 
-```bash
 make
+
+## Instrucciones Permitidas
+
+El programa debe operar exclusivamente con las siguientes instrucciones:
+
+- **`sa`**: Intercambia los dos primeros elementos de la pila `a`.
+- **`sb`**: Intercambia los dos primeros elementos de la pila `b`.
+- **`ss`**: Realiza `sa` y `sb` simultáneamente.
+- **`pa`**: Pasa el primer elemento de la pila `b` a la pila `a`.
+- **`pb`**: Pasa el primer elemento de la pila `a` a la pila `b`.
+- **`ra`**: Rota la pila `a` hacia arriba.
+- **`rb`**: Rota la pila `b` hacia arriba.
+- **`rr`**: Realiza `ra` y `rb` simultáneamente.
+- **`rra`**: Rota la pila `a` hacia abajo.
+- **`rrb`**: Rota la pila `b` hacia abajo.
+- **`rrr`**: Realiza `rra` y `rrb` simultáneamente.
+
+---
+
+## Estructura del Proyecto
+
+push_swap/
+├── includes/            # Archivos de cabecera (.h)
+├── src/                 # Archivos fuente (.c)
+│   ├── push_swap.c      # Punto de entrada
+│   ├── instructions.c/  # Implementación de operaciones (sa, pb, etc.)
+│   ├── algorithms/      # Algoritmos de ordenamiento
+│   ├── utils/           # Funciones auxiliares
+├── Makefile             # Script para compilación
+├── README.md            # Documentación del proyecto
