@@ -13,7 +13,6 @@ Este proyecto se desarrolla como parte del currículo de la escuela 42, y pone a
 - [Características](#características)
 - [Requisitos](#requisitos)
 - [Compilación](#compilación)
-- [Uso](#uso)
 - [Instrucciones Permitidas](#instrucciones-permitidas)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Optimización](#optimización)
