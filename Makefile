@@ -1,8 +1,32 @@
+NAME = push_swap
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+LIBFT_DIR = ft_libft
+PRINTF_DIR = ft_printf
+LIBFT = $(LIBFT_DIR)/libft.a
+PRINTF = $(PRINTF_DIR)/libftprintf.a
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
-NAME = push_swap.a
 
-SRC = 
+all: $(NAME)
 
-OBJS = 
+$(NAME): $(OBJS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PRINTF)
 
-BONUS = 
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+$(PRINTF):
+	make -C $(PRINTF_DIR)
+
+clean:
+	rm -f $(OBJS)
+	make clean -C $(LIBFT_DIR)
+	make clean -C $(PRINTF_DIR)
+fclean: clean
+	rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(PRINTF_DIR)
+
+re: clean fclean all
