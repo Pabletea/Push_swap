@@ -25,11 +25,50 @@ void ss(t_stack a, t_stack b)
     sb(b);
 }
 
-void pa(t_stack a, t_stack b);
+void pa(t_stack *a, t_stack *b)
+{
+    if (b->top == NULL) {
+        return;
+    }
 
-void pb(t_stack a, t_stack b);
+    t_node *temp = b->top;
+    b->top = b->top->next;
 
-void ra(t_stack a);
+    temp->next = a->top;
+    a->top = temp;
+}
+
+
+void pb(t_stack *a, t_stack *b)
+{
+    if (a->top == NULL)
+        return;
+
+    t_node *temp = a->top;
+    a->top = a->top->next;
+
+    temp->next = b->top;
+    b->top = temp;
+
+}
+
+void ra(t_stack a){
+
+    if (a.top == NULL || a.top->next == NULL) {
+        return;
+
+    t_node *first = a.top;
+    a.top = a.top->next;
+
+    t_node *current = a.top;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = first;
+    first->next = NULL;
+
+}
 
 void rb(t_stack b);
 
