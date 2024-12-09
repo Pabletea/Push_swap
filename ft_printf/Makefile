@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 EXE = test_program
 
-CC = cc
+CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 

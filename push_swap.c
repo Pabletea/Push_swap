@@ -134,7 +134,7 @@ int validate_input(int argc, char *argv[])
         }
 
         // Convertir el argumento a entero
-        number = ft_atoi(argv[i]);
+        number = atoi(argv[i]);
 
         if (number > 2147483647 || number < -2147483647)
             return (0);

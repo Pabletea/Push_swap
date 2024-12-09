@@ -31,7 +31,7 @@ BONUS_OBJS	=	$(BONUS:.c=.o)
 
 BONUS_FLAG = .bonus_compiled
 
-CC			=	cc
+CC			=	gcc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
 
