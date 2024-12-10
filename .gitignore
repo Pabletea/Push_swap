@@ -3,6 +3,7 @@
 *.dll
 *.so
 *.o
+.*a
 *.dylib
 *.vscode
 push_swap.exe
