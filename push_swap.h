@@ -32,8 +32,6 @@ typedef struct t_stack
 	t_node			*top;
 }					t_stack;
 
-
-
 /*------------------------INSTRUCTIONS------------------------*/
 
 void				sa(t_stack a);
@@ -42,13 +40,13 @@ void				sb(t_stack b);
 
 void				ss(t_stack a, t_stack b);
 
-void				pa(t_stack *a, t_stack *b);
+void				pa(t_stack a, t_stack b);
 
-void				pb(t_stack *a, t_stack *b);
+void				pb(t_stack a, t_stack b);
 
-void				ra(t_stack a);
+void				ra(t_stack *a);
 
-void				rb(t_stack b);
+void				rb(t_stack *b);
 
 void				rr(t_stack a, t_stack b);
 
@@ -61,6 +59,5 @@ void				rrr(t_stack a, t_stack b);
 /*------------------------UTILS------------------------*/
 
 int					stack_len(t_stack stack);
-
-
+int fillStack(t_stack *stack, int *stackValues, int nValues);
 #endif

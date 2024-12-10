@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+//Intercambia los dos primeros elementos del stack a
 void sa(t_stack a)
 {
     t_node *node;
@@ -26,88 +27,83 @@ void sa(t_stack a)
     }
 }
 
+//Intercambia los dos primeros elementos del stack b
 void sb(t_stack b)
 {
     sa(b);
 }
 
+// sa and sb a la vez
 void ss(t_stack a, t_stack b)
 {
     sa(a);
     sb(b);
 }
 
-void pa(t_stack *a, t_stack *b)
+void pa(t_stack a, t_stack b)
 {
-    if (b->top == NULL) {
+    if (b.top == NULL) {
         return;
     }
 
-    t_node *temp = b->top;
-    b->top = b->top->next;
-
-    temp->next = a->top;
-    a->top = temp;
-}
-
-
-void pb(t_stack *a, t_stack *b)
-{
-    if (a->top == NULL)
-        return;
-
-    t_node *temp = a->top;
-    a->top = a->top->next;
-
-    temp->next = b->top;
-    b->top = temp;
-
-}
-
-void ra(t_stack a){
-
-    if (a.top == NULL || a.top->next == NULL) 
-        return;
-
-    t_node *first = a.top;
-    a.top = a.top->next;
-
-    t_node *current = a.top;
-    while (current->next != NULL) {
-        current = current->next;
-    }
-
-    current->next = first;
-    first->next = NULL;
-
-}
-
-void rb(t_stack b)
-{
-    if (b.top == NULL || b.top->next == NULL) 
-        return;
-
-    t_node *first = b.top;
+    t_node *temp = b.top;
     b.top = b.top->next;
 
-    t_node *current = b.top;
-    while (current->next != NULL) {
-        current = current->next;
+    temp->next = a.top;
+    a.top = temp;
+}
+
+
+void pb(t_stack a, t_stack b)
+{
+    if (a.top == NULL)
+        return;
+
+    t_node *temp = a.top;
+    a.top = a.top->next;
+
+    temp->next = b.top;
+    b.top = temp;
+
+}
+
+//Desplaza hacia a arriba todos los elementos del stack y el primero pasa a ser el ultimo
+void ra(t_stack *a){
+
+    if (a == NULL || a->top == NULL || a->top->next == NULL) {
+        return;
     }
+    t_node *temp = a->top;
+    a->top = a->top->next;
+    t_node *current = a->top;
+    while (current->next != NULL)
+        current = current->next;
+    current->next = temp;
+    temp->next = NULL;
+}
 
-    current->next = first;
-    first->next = NULL;
+void rb(t_stack *b)
+{
 
+    if (b == NULL || b->top == NULL || b->top->next == NULL) {
+        return;
+    }
+    t_node *temp = b->top;
+    b->top = b->top->next;
+    t_node *current = b->top;
+    while (current->next != NULL)
+        current = current->next;
+    current->next = temp;
+    temp->next = NULL;
 }
 
 void rr(t_stack a, t_stack b)
 {
     if (a.top == NULL || b.top == NULL)
         return;
-    ra(a);
-    rb(b);
+    ra(&a);
+    rb(&b);
 }
-
 void rra(t_stack a)
 {
     if (a.top == NULL || a.top->next == NULL)
