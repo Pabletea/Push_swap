@@ -13,7 +13,8 @@
 #include "push_swap.h"
 
 int *validate_input(int argc, char *argv[], int *stackValues);
-void imprimir_pila(t_stack *stack);
+// void imprimir_pila(t_stack *stack, const char *nombre);
+void imprimir_estado(t_stack *a, t_stack *b);
 
 int main(int argc, char *argv[])
 {
@@ -39,14 +40,14 @@ int main(int argc, char *argv[])
 
     if (stackValues) {
 
-        printf("----------------\n");
-        printf("STACK A (inicial):\n");
-        imprimir_pila(&stack);
+    // Imprimir el estado inicial
+    imprimir_estado(&stack, &stack_b);
+    
+    // Ejecución de algunas operaciones y mostrar el estado
+    printf("Exec sa:\n");
+    sa(stack);
+    imprimir_estado(&stack, &stack_b);
 
-        printf("----------------\n");
-        printf("STACK B (inicial):\n");
-        imprimir_pila(&stack_b);
-        printf("*********************************");
     } else {
         printf("Error\n");
     }
@@ -55,15 +56,49 @@ int main(int argc, char *argv[])
 
 }
 
-void imprimir_pila(t_stack *stack) {
-    t_node *actual = stack->top;
 
-    while (actual != NULL) {
-        ft_printf("%d ", actual->data);
-        actual = actual->next;
+void imprimir_estado(t_stack *a, t_stack *b) {
+    t_node *current_a = a->top;
+    t_node *current_b = b->top;
+    int max_height = 0;
+
+    // Determinar la altura máxima entre ambas pilas
+    t_node *temp_a = current_a;
+    t_node *temp_b = current_b;
+    while (temp_a != NULL) {
+        max_height++;
+        temp_a = temp_a->next;
     }
-    ft_printf("\n");
+    while (temp_b != NULL) {
+        max_height++;
+        temp_b = temp_b->next;
+    }
+
+    // Imprimir las pilas en columnas
+    for (int i = 0; i < max_height; i++) {
+        if (current_a != NULL) {
+            printf("| %d ", current_a->data);
+            current_a = current_a->next;
+        } else {
+            printf("|    "); // Espacio vacío para pila a
+        }
+
+        if (current_b != NULL) {
+            printf("| %d ", current_b->data);
+            current_b = current_b->next;
+        } else {
+            printf("|   "); // Espacio vacío para pila b
+        }
+
+        printf("|\n");
+    }
+
+    // Imprimir el nombre de cada pila debajo
+    printf("|----|---|\n");
+    printf("  a    b \n");
 }
+
+
 //Manejar los argumentos recibidos por parametro
 
 int *validate_input(int argc, char *argv[], int *stackValues)
@@ -125,7 +160,6 @@ int *validate_input(int argc, char *argv[], int *stackValues)
 
         // Convertir el argumento a entero
         number = ft_atoi(argv[i]);
-        printf("Numero convertido %d", number);
 
         if (number > 2147483647 || number < -2147483647)
         {

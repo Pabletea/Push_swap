@@ -22,14 +22,6 @@ int fillStack(t_stack *stack, int *stackValues, int nValues)
         return (-1);
     i = 0;
 
-    int j = 0;
-    printf("Elementos del array del que rellena el stack : !!");
-    while(stackValues[j])
-    {
-
-        printf("%d",stackValues[j]);
-        j++;
-    }
 
     while(i < nValues)
     {
