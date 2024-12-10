@@ -2,5 +2,7 @@
 *.out
 *.dll
 *.so
+*.o
 *.dylib
 *.vscode
+push_swap.exe
