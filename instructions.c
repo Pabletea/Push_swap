@@ -40,30 +40,23 @@ void ss(t_stack a, t_stack b)
     sb(b);
 }
 
-void pa(t_stack a, t_stack b)
+void pa(t_stack* a, t_stack* b)
 {
-    if (b.top == NULL) {
-        return;
+    if (b->top == NULL) {
+        return; // Stack b is empty
     }
-
-    t_node *temp = b.top;
-    b.top = b.top->next;
-
-    temp->next = a.top;
-    a.top = temp;
+    int data = pop(b);
+    push(a, data);
 }
 
 
-void pb(t_stack a, t_stack b)
+void pb(t_stack* a, t_stack* b)
 {
-    if (a.top == NULL)
-        return;
-
-    t_node *temp = a.top;
-    a.top = a.top->next;
-
-    temp->next = b.top;
-    b.top = temp;
+    if (a->top == NULL) {
+        return; // Stack a is empty
+    }
+    int data = pop(a);
+    push(b, data);
 
 }
 
@@ -104,46 +97,48 @@ void rr(t_stack a, t_stack b)
     ra(&a);
     rb(&b);
 }
-void rra(t_stack a)
+void rra(t_stack *a)
 {
-    if (a.top == NULL || a.top->next == NULL)
-        return;
-
-    t_node *current = a.top;
-    t_node *prev = NULL;
-
-    while (current->next != NULL) {
-        prev = current;
-        current = current->next;
+    if (a->top == NULL || a->top->next == NULL) {
+        return;  // No hay nada que rotar
     }
 
-    prev->next = NULL;
-    current->next = a.top;
-    a.top = current;
+    // Encontrar el penúltimo nodo
+    t_node* second_to_last = a->top;
+    while (second_to_last->next->next != NULL) {
+        second_to_last = second_to_last->next;
+    }
+
+    // El último nodo se convierte en el nuevo top
+    t_node* last = second_to_last->next;
+    second_to_last->next = NULL;  // Desconectar el último nodo
+    last->next = a->top;
+    a->top = last;
 }
 
-void rrb(t_stack b)
+void rrb(t_stack *b)
 {
-    if (b.top == NULL || b.top->next == NULL)
-        return;
-
-    t_node *current = b.top;
-    t_node *prev = NULL;
-
-    while (current->next != NULL) {
-        prev = current;
-        current = current->next;
+    if (b->top == NULL || b->top->next == NULL) {
+        return;  // No hay nada que rotar
     }
 
-    prev->next = NULL;
-    current->next = b.top;
-    b.top = current;
+    // Encontrar el penúltimo nodo
+    t_node* second_to_last = b->top;
+    while (second_to_last->next->next != NULL) {
+        second_to_last = second_to_last->next;
+    }
+
+    // El último nodo se convierte en el nuevo top
+    t_node* last = second_to_last->next;
+    second_to_last->next = NULL;  // Desconectar el último nodo
+    last->next = b->top;
+    b->top = last;
 }
 
 void rrr(t_stack a, t_stack b)
 {
     if (a.top == NULL || b.top == NULL)
         return;
-    rra(a);
-    rrb(b);
+    rra(&a);
+    rrb(&b);
 }

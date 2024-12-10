@@ -64,4 +64,24 @@ void initializeStack(t_stack *stack, int nValues)
 
         i++;
     }
+    
+}
+
+void push(t_stack* stack, int data) {
+    t_node* newNode = (t_node*)malloc(sizeof(t_node));
+    newNode->data = data;
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+int pop(t_stack* stack) {
+    if (stack->top == NULL) {
+        // Pila vacía
+        return -1;
+    }
+    t_node* temp = stack->top;
+    int data = temp->data;
+    stack->top = temp->next;
+    free(temp);
+    return data;
 }

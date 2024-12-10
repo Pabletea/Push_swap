@@ -18,8 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
-// Definimos cada nodo dentro de un stack
+/*------------------------DEFINICIONES------------------------*/
 typedef struct t_node
 {
 	int				data;
@@ -40,9 +39,9 @@ void				sb(t_stack b);
 
 void				ss(t_stack a, t_stack b);
 
-void				pa(t_stack a, t_stack b);
+void				pa(t_stack* a, t_stack* b);
 
-void				pb(t_stack a, t_stack b);
+void				pb(t_stack* a, t_stack* b);
 
 void				ra(t_stack *a);
 
@@ -50,9 +49,9 @@ void				rb(t_stack *b);
 
 void				rr(t_stack a, t_stack b);
 
-void				rra(t_stack a);
+void				rra(t_stack *a);
 
-void				rrb(t_stack b);
+void				rrb(t_stack *b);
 
 void				rrr(t_stack a, t_stack b);
 
@@ -61,4 +60,6 @@ void				rrr(t_stack a, t_stack b);
 int					stack_len(t_stack stack);
 int fillStack(t_stack *stack, int *stackValues, int nValues);
 void initializeStack(t_stack *stack, int nValues);
+void push(t_stack* stack, int data);
+int pop(t_stack* stack);
 #endif
