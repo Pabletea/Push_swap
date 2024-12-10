@@ -21,111 +21,35 @@ int main(int argc, char *argv[])
     t_stack stack;
     t_stack stack_b;
 
-    // t_node *node_a_1 = (t_node*)malloc(sizeof(t_node));
-    // node_a_1->data = 50;
-    // node_a_1->next = NULL;
-    t_node *node_b_1 = (t_node*)malloc(sizeof(t_node));
-    node_b_1->data = 1;
-    node_b_1->next = NULL;
-
-    // t_node *node_a_2 = (t_node*)malloc(sizeof(t_node));
-    // node_a_2->data = 20;
-    // node_a_2->next = node_a_1;
-    t_node *node_b_2 = (t_node*)malloc(sizeof(t_node));
-    node_b_2->data = 2;
-    node_b_2->next = node_b_1;
-
-
-    // t_node *node_a_3 = (t_node*)malloc(sizeof(t_node));
-    // node_a_3->data = 10;
-    // node_a_3->next = node_a_2;
-    t_node *node_b_3 = (t_node*)malloc(sizeof(t_node));
-    node_b_3->data = 3;
-    node_b_3->next = node_b_2;
-
-    // stack.top = node_a_3;
-    stack_b.top = node_b_3;
-
-    //Llenar el stack A con los valores introducidos por parametro
-
     stackValues = (int *)malloc((argc - 1) * sizeof(int));
     if (!stackValues)
         return (0);
+    
 
     stackValues = validate_input(argc,argv,stackValues);
     if(fillStack(&stack,stackValues,argc - 1) != 1)
+    {
+        free(stackValues);
         return (0);
+    }
+    
+    initializeStack(&stack_b,argc - 1);
+
+
+
     if (stackValues) {
 
-        printf("OK");
         printf("----------------\n");
         printf("STACK A (inicial):\n");
         imprimir_pila(&stack);
+
         printf("----------------\n");
         printf("STACK B (inicial):\n");
         imprimir_pila(&stack_b);
-        printf("************************************************\n");
-        
-
-        sa(stack);
-        printf("Después de sa:\n");
-        printf("----------------\n");
-        printf("STACK A:\n");
-        imprimir_pila(&stack);
-        printf("************************************************\n");
-
-
-        sb(stack_b);
-        printf("Después de sb:\n");
-        printf("----------------\n");
-        printf("STACK B:\n");
-        imprimir_pila(&stack_b);
-        printf("************************************************\n");
-
-
-        // Prueba de ss (swap ambos stacks)
-        ss(stack, stack_b);
-        printf("Después de ss (swap ambos stacks):\n");
-        printf("----------------\n");
-        printf("STACK A:\n");
-        imprimir_pila(&stack);
-        printf("----------------\n");
-        printf("STACK B:\n");
-        imprimir_pila(&stack_b);
-        printf("************************************************\n");
-
-        // Prueba de ra (rotate stack A)
-        ra(&stack);
-        printf("Después de ra (rotate stack A):\n");
-        printf("STACK A:\n");
-        imprimir_pila(&stack);
-        printf("************************************************\n");
-
-        // Prueba de rra (reverse rotate stack A)
-        rra(stack);
-        printf("Después de rra (reverse rotate stack A):\n");
-        imprimir_pila(&stack);
-        printf("************************************************\n");
-
-        // Prueba de rb (rotate stack B)
-        rb(&stack_b);
-        printf("Después de rb (rotate stack B):\n");
-        imprimir_pila(&stack_b);
-        printf("************************************************\n");
-
-        // Prueba de rb (rotate stack B)
-        rrb(stack_b);
-        printf("Después de rb (rotate stack B):\n");
-        imprimir_pila(&stack_b);
-        printf("************************************************\n");
-
-
-
+        printf("*********************************");
     } else {
         printf("Error\n");
     }
-
-    return 0;
     
     return(0);
 
