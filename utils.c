@@ -85,3 +85,4 @@ int pop(t_stack* stack) {
     free(temp);
     return data;
 }
+

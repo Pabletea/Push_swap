@@ -43,34 +43,37 @@ int main(int argc, char *argv[])
     // Imprimir el estado inicial
     imprimir_estado(&stack, &stack_b);
     
-    // Ejecución de algunas operaciones y mostrar el estado
-    printf("Exec sa:\n\n");
-    sa(stack);
+    // // Ejecución de algunas operaciones y mostrar el estado
+    printf("Exec sortThree:\n\n");
+    sort_three(&stack);
     imprimir_estado(&stack, &stack_b);
 
-    printf("Exec pa:\n\n");
-    pa(&stack,&stack_b);
-    imprimir_estado(&stack,&stack_b);
-
-    printf("Exec pb:\n\n");
-    pb(&stack,&stack_b);
-    imprimir_estado(&stack,&stack_b);
-
-    printf("Exec ra:\n\n");
-    ra(&stack);
-    imprimir_estado(&stack,&stack_b);
-
-    printf("Exec rb:\n\n");
-    rb(&stack_b);
-    imprimir_estado(&stack,&stack_b);
-
-    printf("Exec rra:\n\n");
-    rra(&stack);
-    imprimir_estado(&stack,&stack_b);
-
-    // printf("Exec rrb:\n\n");
-    // rrb(&stack_b);
+    // printf("Exec pa:\n\n");
+    // pa(&stack,&stack_b);
     // imprimir_estado(&stack,&stack_b);
+
+    // printf("Exec pb:\n\n");
+    // pb(&stack,&stack_b);
+    // imprimir_estado(&stack,&stack_b);
+
+    // printf("Exec ra:\n\n");
+    // ra(&stack);
+    // imprimir_estado(&stack,&stack_b);
+
+    // printf("Exec rb:\n\n");
+    // rb(&stack_b);
+    // imprimir_estado(&stack,&stack_b);
+
+    // printf("Exec rra:\n\n");
+    // rra(&stack);
+    // imprimir_estado(&stack,&stack_b);
+
+    // // printf("Exec rrb:\n\n");
+    // // rrb(&stack_b);
+    // // imprimir_estado(&stack,&stack_b);
+
+
+
 
 
 

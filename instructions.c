@@ -13,14 +13,14 @@
 #include "push_swap.h"
 
 //Intercambia los dos primeros elementos del stack a
-void sa(t_stack a)
+void sa(t_stack *a)
 {
     t_node *node;
     int temp;
 
-    if (stack_len(a)  >= 2)
+    if (stack_len(*a)  >= 2)
     {
-        node = a.top;
+        node = a->top;
         temp = node->data;
         node->data = node->next->data;
         node->next->data = temp;
@@ -28,13 +28,13 @@ void sa(t_stack a)
 }
 
 //Intercambia los dos primeros elementos del stack b
-void sb(t_stack b)
+void sb(t_stack *b)
 {
     sa(b);
 }
 
 // sa and sb a la vez
-void ss(t_stack a, t_stack b)
+void ss(t_stack *a, t_stack *b)
 {
     sa(a);
     sb(b);
@@ -90,12 +90,12 @@ void rb(t_stack *b)
     temp->next = NULL;
 }
 
-void rr(t_stack a, t_stack b)
+void rr(t_stack *a, t_stack *b)
 {
-    if (a.top == NULL || b.top == NULL)
+    if (a->top == NULL || b->top == NULL)
         return;
-    ra(&a);
-    rb(&b);
+    ra(a);
+    rb(b);
 }
 void rra(t_stack *a)
 {
@@ -135,10 +135,10 @@ void rrb(t_stack *b)
     b->top = last;
 }
 
-void rrr(t_stack a, t_stack b)
+void rrr(t_stack *a, t_stack *b)
 {
-    if (a.top == NULL || b.top == NULL)
+    if (a->top == NULL || b->top == NULL)
         return;
-    rra(&a);
-    rrb(&b);
+    rra(a);
+    rrb(b);
 }
