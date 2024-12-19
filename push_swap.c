@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     int *stackValues;
     t_stack stack;
     t_stack stack_b;
+    int stack_nodes;
 
     stackValues = (int *)malloc((argc - 1) * sizeof(int));
     if (!stackValues)
@@ -36,41 +37,43 @@ int main(int argc, char *argv[])
     
     initializeStack(&stack_b,argc - 1);
 
-
+    stack_nodes = stack_len(&stack);
 
     if (stackValues) {
 
-    // Imprimir el estado inicial
-    imprimir_estado(&stack, &stack_b);
-    
-    // // Ejecución de algunas operaciones y mostrar el estado
-    printf("Exec sortThree:\n\n");
-    sort_three(&stack);
-    imprimir_estado(&stack, &stack_b);
+        // stack_nodes = stack_len(stack);
+        // Imprimir el estado inicial
+        imprimir_estado(&stack, &stack_b);
+        
+        if (stack_nodes == 3)
+        {
+            printf("Exec sortThree:\n\n");
+            sort_three(&stack);
+            imprimir_estado(&stack, &stack_b);
+        }
+        // printf("Exec pa:\n\n");
+        // pa(&stack,&stack_b);
+        // imprimir_estado(&stack,&stack_b);
 
-    // printf("Exec pa:\n\n");
-    // pa(&stack,&stack_b);
-    // imprimir_estado(&stack,&stack_b);
+        // printf("Exec pb:\n\n");
+        // pb(&stack,&stack_b);
+        // imprimir_estado(&stack,&stack_b);
 
-    // printf("Exec pb:\n\n");
-    // pb(&stack,&stack_b);
-    // imprimir_estado(&stack,&stack_b);
+        // printf("Exec ra:\n\n");
+        // ra(&stack);
+        // imprimir_estado(&stack,&stack_b);
 
-    // printf("Exec ra:\n\n");
-    // ra(&stack);
-    // imprimir_estado(&stack,&stack_b);
+        // printf("Exec rb:\n\n");
+        // rb(&stack_b);
+        // imprimir_estado(&stack,&stack_b);
 
-    // printf("Exec rb:\n\n");
-    // rb(&stack_b);
-    // imprimir_estado(&stack,&stack_b);
+        // printf("Exec rra:\n\n");
+        // rra(&stack);
+        // imprimir_estado(&stack,&stack_b);
 
-    // printf("Exec rra:\n\n");
-    // rra(&stack);
-    // imprimir_estado(&stack,&stack_b);
-
-    // // printf("Exec rrb:\n\n");
-    // // rrb(&stack_b);
-    // // imprimir_estado(&stack,&stack_b);
+        // // printf("Exec rrb:\n\n");
+        // // rrb(&stack_b);
+        // // imprimir_estado(&stack,&stack_b);
 
 
 

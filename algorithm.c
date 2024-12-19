@@ -15,8 +15,6 @@ void sort_three(t_stack *a)
 {
     t_node *current;
 
-    if (!a || !a->top || !a->top->next || !a->top->next->next)
-        return; // Asegurarse de que hay exactamente tres elementos
 
     current = a->top;
 

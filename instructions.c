@@ -18,7 +18,7 @@ void sa(t_stack *a)
     t_node *node;
     int temp;
 
-    if (stack_len(*a)  >= 2)
+    if (stack_len(a)  >= 2)
     {
         node = a->top;
         temp = node->data;

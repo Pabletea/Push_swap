@@ -61,7 +61,7 @@ void				rrr(t_stack *a, t_stack *b);
 
 /*------------------------UTILS------------------------*/
 
-int					stack_len(t_stack stack);
+int					stack_len(t_stack *stack);
 int fillStack(t_stack *stack, int *stackValues, int nValues);
 void initializeStack(t_stack *stack, int nValues);
 void push(t_stack* stack, int data);
