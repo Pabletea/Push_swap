@@ -29,13 +29,18 @@ int main(int argc, char *argv[])
     
 
     stackValues = validate_input(argc,argv,stackValues);
+
+    
+    initializeStack(&stack,argc - 1);
+    initializeStack(&stack_b,argc - 1);
+
     if(fillStack(&stack,stackValues,argc - 1) != 1)
     {
         free(stackValues);
         return (0);
     }
-    
-    initializeStack(&stack_b,argc - 1);
+
+
 
     stack_nodes = stack_len(&stack);
 
@@ -51,29 +56,29 @@ int main(int argc, char *argv[])
             sort_three(&stack);
             imprimir_estado(&stack, &stack_b);
         }
-        // printf("Exec pa:\n\n");
-        // pa(&stack,&stack_b);
-        // imprimir_estado(&stack,&stack_b);
+        printf("Exec pa:\n\n");
+        pa(&stack,&stack_b);
+        imprimir_estado(&stack,&stack_b);
 
-        // printf("Exec pb:\n\n");
-        // pb(&stack,&stack_b);
-        // imprimir_estado(&stack,&stack_b);
+        printf("Exec pb:\n\n");
+        pb(&stack,&stack_b);
+        imprimir_estado(&stack,&stack_b);
 
-        // printf("Exec ra:\n\n");
-        // ra(&stack);
-        // imprimir_estado(&stack,&stack_b);
+        printf("Exec ra:\n\n");
+        ra(&stack);
+        imprimir_estado(&stack,&stack_b);
 
-        // printf("Exec rb:\n\n");
-        // rb(&stack_b);
-        // imprimir_estado(&stack,&stack_b);
+        printf("Exec rb:\n\n");
+        rb(&stack_b);
+        imprimir_estado(&stack,&stack_b);
 
-        // printf("Exec rra:\n\n");
-        // rra(&stack);
-        // imprimir_estado(&stack,&stack_b);
+        printf("Exec rra:\n\n");
+        rra(&stack);
+        imprimir_estado(&stack,&stack_b);
 
-        // // printf("Exec rrb:\n\n");
-        // // rrb(&stack_b);
-        // // imprimir_estado(&stack,&stack_b);
+        printf("Exec rrb:\n\n");
+        rrb(&stack_b);
+        imprimir_estado(&stack,&stack_b);
 
 
 
@@ -141,28 +146,23 @@ int *validate_input(int argc, char *argv[], int *stackValues)
     int string_check;
     int *seen_numbers;
     int seen_count = 0;
-    int number;
+    long number;
 
     if (argc <= 1)
         return (NULL);
 
-    // Reservar memoria para almacenar poder almacenar los numeros y comprobar que no hay duplicados
-    seen_numbers = (int *)malloc((argc - 1) * sizeof(int));
+    // Reservar memoria inicializada para evitar valores basura
+    seen_numbers = (int *)calloc((argc - 1), sizeof(int));
     if (!seen_numbers)
         return (NULL);
-    stackValues = (int *)malloc((argc - 1) * sizeof(int));
-    if (!stackValues)
-    {
-        free(seen_numbers);
-        return (NULL);
-    }
+
     i = 1;
     while (i < argc)
     {
         j = 0;
         string_check = 1;
 
-        // Validar cada argumento como un número
+        // Validar que el argumento sea un número
         while (argv[i][j])
         {
             if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0 )
@@ -185,8 +185,7 @@ int *validate_input(int argc, char *argv[], int *stackValues)
 
         if (string_check == 0) // Argumento inválido
         {
-            free(stackValues);
-            free(seen_numbers); // Liberar memoria antes de salir
+            free(seen_numbers);
             return (NULL);
         }
 
@@ -195,31 +194,32 @@ int *validate_input(int argc, char *argv[], int *stackValues)
 
         if (number > 2147483647 || number < -2147483647)
         {
-            free(stackValues);
             free(seen_numbers);
             return (NULL);
         }
+
         // Verificar si el número ya fue visto
         z = 0;
         while (z < seen_count)
         {
             if (seen_numbers[z] == number)
             {
-                free(stackValues);
                 free(seen_numbers);
                 return (NULL);
             }
             z++;
         }
-        // Agregar número al array de números vistos
-        seen_numbers[seen_count] = number;
+
+        // Agregar número al array de números vistos y stackValues
+        seen_numbers[seen_count] = (int)number;
+        stackValues[i - 1] = (int)number;
         seen_count++;
         i++;
     }
-    
-    ft_memcpy(stackValues,seen_numbers,(argc-1)*sizeof(int));
-    free(seen_numbers);
+
+    free(seen_numbers); // Liberar memoria de números vistos
     return (stackValues);
 }
+
 
 
