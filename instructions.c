@@ -6,139 +6,189 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2024/12/09 12:35:19 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:59:06 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//Intercambia los dos primeros elementos del stack a
-void sa(t_stack *a)
+int	swap(t_stack **stack)
 {
-    t_node *node;
-    int temp;
+	t_stack	*top;
+	t_stack	*next;
+	int		data;
+	int		index;
 
-    if (stack_len(a)  >= 2)
-    {
-        node = a->top;
-        temp = node->data;
-        node->data = node->next->data;
-        node->next->data = temp;
-    }
+	if (ft_lstsize(*stack) < 2)
+		return (-1);
+	top = *stack;
+	next = top->next;
+	if (!top && !next)
+		ft_printf("Error en el swap");
+	data = top->data;
+	index = top->index;
+	top->data = next->data;
+	top->index = next->index;
+	next->data = data;
+	next->index = index;
+	return (0);
 }
 
-//Intercambia los dos primeros elementos del stack b
-void sb(t_stack *b)
+int	sa(t_stack **stack_a)
 {
-    sa(b);
+	if (swap(stack_a) == -1)
+		return (-1);
+	ft_putendl_fd("sa", 1);
+	return (0);
 }
 
-// sa and sb a la vez
-void ss(t_stack *a, t_stack *b)
+int	sb(t_stack **stack_b)
 {
-    sa(a);
-    sb(b);
+	if (swap(stack_b) == -1)
+		return (-1);
+	ft_putendl_fd("sb", 1);
+	return (0);
 }
 
-void pa(t_stack* a, t_stack* b)
+int	ss(t_stack **stack_a, t_stack **stack_b)
 {
-    if (b->top == NULL) {
-        return; // Stack b is empty
-    }
-    int data = pop(b);
-    push(a, data);
+	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+		return (-1);
+	swap(stack_a);
+	swap(stack_b);
+	ft_putendl_fd("ss", 1);
+	return (0);
 }
 
-
-void pb(t_stack* a, t_stack* b)
+int	push(t_stack **stack_dest, t_stack **stack_origen)
 {
-    if (a->top == NULL) {
-        return; // Stack a is empty
-    }
-    int data = pop(a);
-    push(b, data);
+	t_stack	*tmp;
+	t_stack	*destino;
+	t_stack	*origen;
 
+	if (ft_lstsize(*stack_origen) == 0)
+		return (-1);
+	destino = *stack_dest;
+	origen = *stack_origen;
+	tmp = origen;
+	origen = origen->next;
+	*stack_origen = origen;
+	if (!destino)
+	{
+		destino = tmp;
+		destino->next = NULL;
+		*stack_dest = destino;
+	}
+	else
+	{
+		tmp->next = destino;
+		*stack_dest = tmp;
+	}
+	return (0);
 }
 
-//Desplaza hacia a arriba todos los elementos del stack y el primero pasa a ser el ultimo
-void ra(t_stack *a){
-
-    if (a == NULL || a->top == NULL || a->top->next == NULL) {
-        return;
-    }
-    t_node *temp = a->top;
-    a->top = a->top->next;
-    t_node *current = a->top;
-    while (current->next != NULL)
-        current = current->next;
-    current->next = temp;
-    temp->next = NULL;
+int	pa(t_stack **stack_a, t_stack **stack_b)
+{
+	if (push(stack_a, stack_b) == -1)
+		return (-1);
+	ft_putendl_fd("pa", 1);
+	return (0);
 }
 
-void rb(t_stack *b)
+int	pb(t_stack **stack_a, t_stack **stack_b)
 {
-
-    if (b == NULL || b->top == NULL || b->top->next == NULL) {
-        return;
-    }
-    t_node *temp = b->top;
-    b->top = b->top->next;
-    t_node *current = b->top;
-    while (current->next != NULL)
-        current = current->next;
-    current->next = temp;
-    temp->next = NULL;
+	if (push(stack_b, stack_a) == -1)
+		return (-1);
+	ft_putendl_fd("pb", 1);
+	return (0);
 }
 
-void rr(t_stack *a, t_stack *b)
+int	rotate(t_stack **stack)
 {
-    if (a->top == NULL || b->top == NULL)
-        return;
-    ra(a);
-    rb(b);
-}
-void rra(t_stack *a)
-{
-    if (a->top == NULL || a->top->next == NULL) {
-        return;  // No hay nada que rotar
-    }
+	t_stack	*top;
+	t_stack	*last;
 
-    // Encontrar el penúltimo nodo
-    t_node* second_to_last = a->top;
-    while (second_to_last->next->next != NULL) {
-        second_to_last = second_to_last->next;
-    }
-
-    // El último nodo se convierte en el nuevo top
-    t_node* last = second_to_last->next;
-    second_to_last->next = NULL;  // Desconectar el último nodo
-    last->next = a->top;
-    a->top = last;
+	if (ft_lstsize(*stack) < 2)
+		return (-1);
+	top = *stack;
+	last = getLast(top);
+	*stack = top->next;
+	top->next = NULL;
+	last->next = top;
+	return (0);
 }
 
-void rrb(t_stack *b)
+int	ra(t_stack **stack_a)
 {
-    if (b->top == NULL || b->top->next == NULL) {
-        return;  // No hay nada que rotar
-    }
-
-    // Encontrar el penúltimo nodo
-    t_node* second_to_last = b->top;
-    while (second_to_last->next->next != NULL) {
-        second_to_last = second_to_last->next;
-    }
-
-    // El último nodo se convierte en el nuevo top
-    t_node* last = second_to_last->next;
-    second_to_last->next = NULL;  // Desconectar el último nodo
-    last->next = b->top;
-    b->top = last;
+	if (rotate(stack_a) == -1)
+		return (-1);
+	ft_putendl_fd("ra", 1);
+	return (0);
 }
 
-void rrr(t_stack *a, t_stack *b)
+int	rb(t_stack **stack_b)
 {
-    if (a->top == NULL || b->top == NULL)
-        return;
-    rra(a);
-    rrb(b);
+	if (rotate(stack_b) == -1)
+		return (-1);
+	ft_putendl_fd("rb", 1);
+	return (0);
+}
+
+int	rr(t_stack **stack_a, t_stack **stack_b)
+{
+	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+		return (-1);
+	rotate(stack_a);
+	rotate(stack_b);
+	ft_putendl_fd("rr", 1);
+	return (0);
+}
+
+int	reverseRotate(t_stack **stack)
+{
+	t_stack	*top;
+	t_stack	*last;
+
+	if (ft_lstsize(*stack) < 2)
+		return (-1);
+	top = *stack;
+	last = getLast(top);
+	while (top)
+	{
+		if (top->next->next == NULL)
+		{
+			top->next = NULL;
+			break ;
+		}
+		top = top->next;
+	}
+	last->next = *stack;
+	*stack = last;
+	return (0);
+}
+
+int	rra(t_stack **stack_a)
+{
+	if (reverseRotate(stack_a) == -1)
+		return (-1);
+	ft_putendl_fd("rra", 1);
+	return (0);
+}
+
+int	rrb(t_stack **stack_b)
+{
+	if (reverseRotate(stack_b) == -1)
+		return (-1);
+	ft_putendl_fd("rrb", 1);
+	return (0);
+}
+
+int	rrr(t_stack **stack_a, t_stack **stack_b)
+{
+	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+		return (-1);
+	reverseRotate(stack_a);
+	reverseRotate(stack_b);
+	ft_putendl_fd("rrr", 1);
+	return (0);
 }

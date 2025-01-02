@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
 
-t_node *findMax(t_stack *a)
+t_stack *findMax(t_stack **a)
 {
     long    max;
-    t_node *max_node;
-    t_node *current = a->top;
+    t_stack *max_node;
+    t_stack *current = *a;
 
     if (!a)
         return (NULL);
@@ -20,4 +20,20 @@ t_node *findMax(t_stack *a)
         current = current->next;
     }
     return(max_node);
+}
+
+t_stack *getLast(t_stack *top)
+{
+    t_stack *tmp;
+
+    tmp = top;
+    while (top->next)
+    {
+        tmp = tmp->next;
+        if (tmp->next == NULL)
+            return(tmp);
+    }
+    return(tmp);
+
+
 }

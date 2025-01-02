@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 14:34:36 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:01:41 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,71 +14,53 @@
 
 int *validate_input(int argc, char *argv[], int *stackValues);
 // void imprimir_pila(t_stack *stack, const char *nombre);
-void imprimir_estado(t_stack *a);
+void imprimir_estado(t_stack **a);
 
 int main(int argc, char *argv[])
 {
     int *stackValues;
-    t_stack stack;
-    // t_stack stack_b;
+    t_stack **stack_a;
+    t_stack **stack_b;
+
     int stack_nodes;
 
+    if (argc < 2)
+        return (-1);
+    
     stackValues = (int *)malloc((argc - 1) * sizeof(int));
     if (!stackValues)
         return (0);
-    
-
     stackValues = validate_input(argc,argv,stackValues);
 
+    stack_a = (t_stack **)malloc(sizeof(t_stack));
+    stack_b = (t_stack **)malloc(sizeof(t_stack));
     
-    initializeStack(&stack,stackValues,(argc - 1));
-
-
-    // if(fillStack(&stack,stackValues,argc - 1) != 1)
-    // {
-    //     free(stackValues);
-    //     return (0);
-    // }
-
-
-
-    stack_nodes = stack_len(&stack);
-
+    initializeStack(stack_a,stackValues, (argc-1));
+    
+    stack_nodes = stack_len(stack_a);
     if (stackValues) {
 
-        // stack_nodes = stack_len(stack);
-        // Imprimir el estado inicial
-        imprimir_estado(&stack);
-        
+        imprimir_estado(&stack_a);        
         if (stack_nodes == 3)
         {
             printf("Exec sortThree:\n\n");
-            sort_three(&stack);
-            imprimir_estado(&stack);
+            sort_three(&stack_a);
+            imprimir_estado(&stack_a);
         }
-
-
-
-
-
-
-
     } else {
         printf("Error\n");
     }
-    
     return(0);
-
 }
 
 
-void imprimir_estado(t_stack *a) {
-    t_node *current_a = a->top;
+void imprimir_estado(t_stack **a) {
+    t_stack *current_a;
     // t_node *current_b = b->top;
     int max_height = 0;
 
     // Determinar la altura máxima entre ambas pilas
-    t_node *temp_a = current_a;
+    t_stack *temp_a;
     // t_node *temp_b = current_b;
     while (temp_a != NULL) {
         max_height++;
@@ -125,7 +107,6 @@ int *validate_input(int argc, char *argv[], int *stackValues)
     int *seen_numbers;
     int seen_count = 0;
     long number;
-
     if (argc <= 1)
         return (NULL);
 
@@ -133,13 +114,11 @@ int *validate_input(int argc, char *argv[], int *stackValues)
     seen_numbers = (int *)calloc((argc - 1), sizeof(int));
     if (!seen_numbers)
         return (NULL);
-
     i = 1;
     while (i < argc)
     {
         j = 0;
         string_check = 1;
-
         // Validar que el argumento sea un número
         while (argv[i][j])
         {
@@ -166,16 +145,13 @@ int *validate_input(int argc, char *argv[], int *stackValues)
             free(seen_numbers);
             return (NULL);
         }
-
         // Convertir el argumento a entero
         number = ft_atoi(argv[i]);
-
         if (number > 2147483647 || number < -2147483647)
         {
             free(seen_numbers);
             return (NULL);
         }
-
         // Verificar si el número ya fue visto
         z = 0;
         while (z < seen_count)
@@ -187,14 +163,12 @@ int *validate_input(int argc, char *argv[], int *stackValues)
             }
             z++;
         }
-
         // Agregar número al array de números vistos y stackValues
         seen_numbers[seen_count] = (int)number;
         stackValues[i - 1] = (int)number;
         seen_count++;
         i++;
     }
-
     free(seen_numbers); // Liberar memoria de números vistos
     return (stackValues);
 }

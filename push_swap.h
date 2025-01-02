@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 14:32:21 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:56:49 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,70 @@
 # define PUSH_SWAP_H
 # include "ft_libft/libft.h"
 # include "ft_printf/ft_printf.h"
+# include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <limits.h>
 # include <unistd.h>
 /*------------------------DEFINICIONES------------------------*/
-typedef struct t_node
+typedef struct s_list
 {
 	int				data;
-	int 			index;
-	struct t_node	*target;
-	struct t_node	*next;
-	struct t_node   *prev;
-}					t_node;
-
-// Definimos el stack
-typedef struct t_stack
-{
-	t_node			*top;
+	int				index;
+	struct s_list	*next;
 }					t_stack;
-
 /*------------------------INSTRUCTIONS------------------------*/
 
-void 				sa(t_stack *a);
+int					swap(t_stack **stack);
+int					sa(t_stack **stack_a);
 
-void				sb(t_stack *b);
+int					sb(t_stack **stack_b);
 
-void				ss(t_stack *a, t_stack *b);
+int					ss(t_stack **stack_a, t_stack **stack_b);
 
-void				pa(t_stack* a, t_stack* b);
+int					push(t_stack **stack_orig, t_stack **stack_dest);
 
-void				pb(t_stack* a, t_stack* b);
+int					pa(t_stack **stack_a, t_stack **stack_b);
 
-void				ra(t_stack *a);
+int					pb(t_stack **stack_a, t_stack **stack_b);
 
-void				rb(t_stack *b);
+int					rotate(t_stack **stack);
 
-void				rr(t_stack *a, t_stack *b);
+int					ra(t_stack **stack_a);
 
-void				rra(t_stack *a);
+int					rb(t_stack **stack_b);
 
-void				rrb(t_stack *b);
+int					rr(t_stack **stack_a, t_stack **stack_b);
 
-void				rrr(t_stack *a, t_stack *b);
+int					reverseRotate(t_stack **stack);
+
+int					rra(t_stack **stack_a);
+
+int					rrb(t_stack **stack_b);
+
+int					rrr(t_stack **stack_a, t_stack **stack_b);
 
 /*------------------------UTILS------------------------*/
 
 int					stack_len(t_stack *stack);
-int fillStack(t_stack *stack, int *stackValues, int nValues);
-void initializeStack(t_stack *stack, int *stackValues, int nValues);
-void push(t_stack* stack, int data);
-int pop(t_stack* stack);
+int					fillStack(t_stack *stack, int *stackValues, int nValues);
+void				initializeStack(t_stack *stack, int *stackValues,
+						int nValues);
+// void push(t_stack* stack, int data);
+int					pop(t_stack *stack);
 
 /*------------------------STACK UTILS-------------------*/
 
-t_node *findMax(t_stack *a);
+
+
+
+/*------------------------LIST UTILS--------------------*/
+
+int	ft_lstsize(t_stack *lst);
+t_stack *getLast(t_stack *top);
+
 
 /*------------------------ALGORITHM-------------------*/
 
-void sort_three(t_stack *a);
+void				sort_three(t_stack **stack);
 #endif
