@@ -36,7 +36,7 @@ int fillStack(t_stack *stack, int *stackValues, int nValues)
     }
     return (1);
 }
-void initializeStack(t_stack *stack, int nValues)
+void initializeStack(t_stack *stack, int *stackValues, int nValues)
 {
     // Inicializa la pila
     stack->top = NULL;
@@ -58,7 +58,7 @@ void initializeStack(t_stack *stack, int nValues)
         }
 
         // Conecta el nuevo nodo a la pila
-        newNode->data = 0; // Opcional: puedes inicializar con un valor neutro si es necesario
+        newNode->data = stackValues[i]; // Opcional: puedes inicializar con un valor neutro si es necesario
         newNode->next = stack->top;
         stack->top = newNode;
 

@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2024/12/03 12:37:39 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:34:36 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int *validate_input(int argc, char *argv[], int *stackValues);
 // void imprimir_pila(t_stack *stack, const char *nombre);
-void imprimir_estado(t_stack *a, t_stack *b);
+void imprimir_estado(t_stack *a);
 
 int main(int argc, char *argv[])
 {
     int *stackValues;
     t_stack stack;
-    t_stack stack_b;
+    // t_stack stack_b;
     int stack_nodes;
 
     stackValues = (int *)malloc((argc - 1) * sizeof(int));
@@ -31,14 +31,14 @@ int main(int argc, char *argv[])
     stackValues = validate_input(argc,argv,stackValues);
 
     
-    initializeStack(&stack,argc - 1);
-    initializeStack(&stack_b,argc - 1);
+    initializeStack(&stack,stackValues,(argc - 1));
 
-    if(fillStack(&stack,stackValues,argc - 1) != 1)
-    {
-        free(stackValues);
-        return (0);
-    }
+
+    // if(fillStack(&stack,stackValues,argc - 1) != 1)
+    // {
+    //     free(stackValues);
+    //     return (0);
+    // }
 
 
 
@@ -48,37 +48,15 @@ int main(int argc, char *argv[])
 
         // stack_nodes = stack_len(stack);
         // Imprimir el estado inicial
-        imprimir_estado(&stack, &stack_b);
+        imprimir_estado(&stack);
         
         if (stack_nodes == 3)
         {
             printf("Exec sortThree:\n\n");
             sort_three(&stack);
-            imprimir_estado(&stack, &stack_b);
+            imprimir_estado(&stack);
         }
-        printf("Exec pa:\n\n");
-        pa(&stack,&stack_b);
-        imprimir_estado(&stack,&stack_b);
 
-        printf("Exec pb:\n\n");
-        pb(&stack,&stack_b);
-        imprimir_estado(&stack,&stack_b);
-
-        printf("Exec ra:\n\n");
-        ra(&stack);
-        imprimir_estado(&stack,&stack_b);
-
-        printf("Exec rb:\n\n");
-        rb(&stack_b);
-        imprimir_estado(&stack,&stack_b);
-
-        printf("Exec rra:\n\n");
-        rra(&stack);
-        imprimir_estado(&stack,&stack_b);
-
-        printf("Exec rrb:\n\n");
-        rrb(&stack_b);
-        imprimir_estado(&stack,&stack_b);
 
 
 
@@ -94,22 +72,22 @@ int main(int argc, char *argv[])
 }
 
 
-void imprimir_estado(t_stack *a, t_stack *b) {
+void imprimir_estado(t_stack *a) {
     t_node *current_a = a->top;
-    t_node *current_b = b->top;
+    // t_node *current_b = b->top;
     int max_height = 0;
 
     // Determinar la altura máxima entre ambas pilas
     t_node *temp_a = current_a;
-    t_node *temp_b = current_b;
+    // t_node *temp_b = current_b;
     while (temp_a != NULL) {
         max_height++;
         temp_a = temp_a->next;
     }
-    while (temp_b != NULL) {
-        max_height++;
-        temp_b = temp_b->next;
-    }
+    // while (temp_b != NULL) {
+    //     max_height++;
+    //     temp_b = temp_b->next;
+    // }
 
     // Imprimir las pilas en columnas
     for (int i = 0; i < max_height; i++) {
@@ -120,12 +98,12 @@ void imprimir_estado(t_stack *a, t_stack *b) {
             printf("|    "); // Espacio vacío para pila a
         }
 
-        if (current_b != NULL) {
-            printf("| %d ", current_b->data);
-            current_b = current_b->next;
-        } else {
-            printf("|   "); // Espacio vacío para pila b
-        }
+        // if (current_b != NULL) {
+        //     printf("| %d ", current_b->data);
+        //     current_b = current_b->next;
+        // } else {
+        //     printf("|   "); // Espacio vacío para pila b
+        // }
 
         printf("|\n");
     }
