@@ -4,6 +4,8 @@
 *.so
 *.o
 .*a
+.*txt
+.*sh
 *.dylib
 *.vscode
 push_swap.exe
