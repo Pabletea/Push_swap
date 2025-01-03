@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 09:24:51 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:25:04 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct s_list
 /*------------------------INSTRUCTIONS------------------------*/
 
 int					swap(t_stack **stack);
-int					sa(t_stack **stack_a);
+int	sa(t_stack **stack_a,t_stack **stack_b);
 
-int					sb(t_stack **stack_b);
+int	sb(t_stack **stack_a,t_stack **stack_b);
 
 int					ss(t_stack **stack_a, t_stack **stack_b);
 
@@ -43,17 +43,17 @@ int					pb(t_stack **stack_a, t_stack **stack_b);
 
 int					rotate(t_stack **stack);
 
-int					ra(t_stack **stack_a);
+int	ra(t_stack **stack_a,t_stack **stack_b);
 
-int					rb(t_stack **stack_b);
+int	rb(t_stack **stack_a,t_stack **stack_b);
 
 int					rr(t_stack **stack_a, t_stack **stack_b);
 
 int					reverseRotate(t_stack **stack);
 
-int					rra(t_stack **stack_a);
+int	rra(t_stack **stack_a,t_stack **stack_b);
 
-int					rrb(t_stack **stack_b);
+int	rrb(t_stack **stack_a,t_stack **stack_b);
 
 int					rrr(t_stack **stack_a, t_stack **stack_b);
 
@@ -63,8 +63,10 @@ int stack_len(t_stack **stack);
 int					fillStack(t_stack *stack, int *stackValues, int nValues);
 void initializeStack(t_stack **stack, int *stackValues, int nValues);
 // void push(t_stack* stack, int data);
-int					pop(t_stack *stack);
-void imprimir_estado(t_stack **a);
+void imprimir_estado(t_stack **a, t_stack **b);
+int isSorted(t_stack **stack);
+int getLowestNode(t_stack **stack);
+void sortStack(t_stack **stack_a, t_stack **stack_b);
 
 /*------------------------STACK UTILS-------------------*/
 
@@ -73,11 +75,12 @@ void imprimir_estado(t_stack **a);
 
 /*------------------------LIST UTILS--------------------*/
 
-int	ft_lstsize(t_stack *lst);
+
 t_stack *getLast(t_stack *top);
 
 
 /*------------------------ALGORITHM-------------------*/
 
-void				sort_three(t_stack **stack);
+void sort_three(t_stack **stack_a,t_stack **stack_b);
+void sort_four(t_stack **stack_a, t_stack **stack_b);
 #endif

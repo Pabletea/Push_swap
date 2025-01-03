@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 16:50:00 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 17:00:08 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:34:38 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,3 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new)
 	}
 }
 
-int	ft_lstsize(t_stack *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst != NULL)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}

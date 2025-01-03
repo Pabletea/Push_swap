@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 09:29:13 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:15:10 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int *validate_input(int argc, char *argv[], int *stackValues);
 // void imprimir_pila(t_stack *stack, const char *nombre);
-void imprimir_estado(t_stack **a);
+void imprimir_estado(t_stack **a, t_stack **b);
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
     t_stack **stack_a;
     t_stack **stack_b;
 
-    int stack_nodes;
 
     if (argc < 2)
         return (-1);
@@ -40,17 +39,17 @@ int main(int argc, char *argv[])
     
     initializeStack(stack_a,stackValues, (argc-1));
     
-    stack_nodes = stack_len(stack_a);
     if (stackValues) {
 
         ft_printf("ESTADO INICIAL :\n");
-        imprimir_estado(stack_a);        
-        if (stack_nodes == 3)
+        imprimir_estado(stack_a,stack_b);        
+        if(isSorted(stack_a))
         {
-            printf("Exec sortThree:\n\n");
-            sort_three(stack_a);
-            ft_printf("ESTADO FINAL :\n");
-            imprimir_estado(stack_a);
+            free(stack_a);
+            free(stack_a);
+            return (0);
+        }else{
+            sortStack(stack_a,stack_b);
         }
     } else {
         printf("Error\n");
@@ -59,22 +58,22 @@ int main(int argc, char *argv[])
 }
 
 
-void imprimir_estado(t_stack **a) {
+void imprimir_estado(t_stack **a, t_stack **b) {
     t_stack *current_a = *a;
-    // t_node *current_b = b->top;
+    t_stack *current_b = *b;
     int max_height = 0;
 
     // Determinar la altura máxima entre ambas pilas
     t_stack *temp_a = *a;
-    // t_node *temp_b = current_b;
+    t_stack *temp_b = current_b;
     while (temp_a != NULL) {
         max_height++;
         temp_a = temp_a->next;
     }
-    // while (temp_b != NULL) {
-    //     max_height++;
-    //     temp_b = temp_b->next;
-    // }
+    while (temp_b != NULL) {
+        max_height++;
+        temp_b = temp_b->next;
+    }
 
     // Imprimir las pilas en columnas
     for (int i = 0; i < max_height; i++) {
@@ -85,12 +84,12 @@ void imprimir_estado(t_stack **a) {
             printf("|    "); // Espacio vacío para pila a
         }
 
-        // if (current_b != NULL) {
-        //     printf("| %d ", current_b->data);
-        //     current_b = current_b->next;
-        // } else {
-        //     printf("|   "); // Espacio vacío para pila b
-        // }
+        if (current_b != NULL) {
+            printf("| %d ", current_b->data);
+            current_b = current_b->next;
+        } else {
+            printf("|   "); // Espacio vacío para pila b
+        }
 
         printf("|\n");
     }
