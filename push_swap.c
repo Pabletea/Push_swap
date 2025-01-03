@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 17:01:41 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:29:13 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,23 @@ int main(int argc, char *argv[])
 
     stack_a = (t_stack **)malloc(sizeof(t_stack));
     stack_b = (t_stack **)malloc(sizeof(t_stack));
+
+    *stack_a = NULL;
+    *stack_b = NULL;
     
     initializeStack(stack_a,stackValues, (argc-1));
     
     stack_nodes = stack_len(stack_a);
     if (stackValues) {
 
-        imprimir_estado(&stack_a);        
+        ft_printf("ESTADO INICIAL :\n");
+        imprimir_estado(stack_a);        
         if (stack_nodes == 3)
         {
             printf("Exec sortThree:\n\n");
-            sort_three(&stack_a);
-            imprimir_estado(&stack_a);
+            sort_three(stack_a);
+            ft_printf("ESTADO FINAL :\n");
+            imprimir_estado(stack_a);
         }
     } else {
         printf("Error\n");
@@ -55,12 +60,12 @@ int main(int argc, char *argv[])
 
 
 void imprimir_estado(t_stack **a) {
-    t_stack *current_a;
+    t_stack *current_a = *a;
     // t_node *current_b = b->top;
     int max_height = 0;
 
     // Determinar la altura máxima entre ambas pilas
-    t_stack *temp_a;
+    t_stack *temp_a = *a;
     // t_node *temp_b = current_b;
     while (temp_a != NULL) {
         max_height++;

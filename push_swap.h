@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 16:56:49 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:24:51 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int					rrr(t_stack **stack_a, t_stack **stack_b);
 
 /*------------------------UTILS------------------------*/
 
-int					stack_len(t_stack *stack);
+int stack_len(t_stack **stack);
 int					fillStack(t_stack *stack, int *stackValues, int nValues);
-void				initializeStack(t_stack *stack, int *stackValues,
-						int nValues);
+void initializeStack(t_stack **stack, int *stackValues, int nValues);
 // void push(t_stack* stack, int data);
 int					pop(t_stack *stack);
+void imprimir_estado(t_stack **a);
 
 /*------------------------STACK UTILS-------------------*/
 

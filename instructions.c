@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/02 16:59:06 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 09:28:05 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	sa(t_stack **stack_a)
 	if (swap(stack_a) == -1)
 		return (-1);
 	ft_putendl_fd("sa", 1);
+	imprimir_estado(stack_a);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -47,6 +49,8 @@ int	sb(t_stack **stack_b)
 	if (swap(stack_b) == -1)
 		return (-1);
 	ft_putendl_fd("sb", 1);
+	imprimir_estado(stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -57,6 +61,9 @@ int	ss(t_stack **stack_a, t_stack **stack_b)
 	swap(stack_a);
 	swap(stack_b);
 	ft_putendl_fd("ss", 1);
+	imprimir_estado(stack_a);
+	imprimir_estado(stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -123,6 +130,8 @@ int	ra(t_stack **stack_a)
 	if (rotate(stack_a) == -1)
 		return (-1);
 	ft_putendl_fd("ra", 1);
+	imprimir_estado(stack_a);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -141,6 +150,9 @@ int	rr(t_stack **stack_a, t_stack **stack_b)
 	rotate(stack_a);
 	rotate(stack_b);
 	ft_putendl_fd("rr", 1);
+	imprimir_estado(stack_a);
+	imprimir_estado(stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -172,6 +184,8 @@ int	rra(t_stack **stack_a)
 	if (reverseRotate(stack_a) == -1)
 		return (-1);
 	ft_putendl_fd("rra", 1);
+	imprimir_estado(stack_a);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -190,5 +204,8 @@ int	rrr(t_stack **stack_a, t_stack **stack_b)
 	reverseRotate(stack_a);
 	reverseRotate(stack_b);
 	ft_putendl_fd("rrr", 1);
+	imprimir_estado(stack_a);
+	imprimir_estado(stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
