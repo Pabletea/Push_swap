@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 12:36:08 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:38:10 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void sortStack(t_stack **stack_a, t_stack **stack_b)
     else if (stackNodes == 4)
         sort_four(stack_a,stack_b);
     else if (stackNodes == 5)
-    {}
+    {
+        
+    }
     else if (stackNodes > 5)
     {}
 }

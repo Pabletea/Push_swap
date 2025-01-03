@@ -6,15 +6,15 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:36:51 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/24 13:30:59 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:12:13 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_hex(unsigned long num);
+static void	print_hex(int fd,unsigned long num);
 
-int	ft_printf_pointer(void *ptr)
+int	ft_printf_pointer(int fd,void *ptr)
 {
 	int				count;
 	unsigned long	address;
@@ -25,7 +25,7 @@ int	ft_printf_pointer(void *ptr)
 		write(1, "(nil)", 5);
 		return (5);
 	}
-	print_hex((unsigned long)ptr);
+	print_hex(fd,(unsigned long)ptr);
 	address = (unsigned long)ptr;
 	while (address != 0)
 	{
@@ -35,7 +35,7 @@ int	ft_printf_pointer(void *ptr)
 	return (count + 2);
 }
 
-static void	print_hex(unsigned long num)
+static void	print_hex(int fd,unsigned long num)
 {
 	const char	*hex_digits = "0123456789abcdef";
 	char		buffer[16];
@@ -47,6 +47,6 @@ static void	print_hex(unsigned long num)
 		buffer[i--] = hex_digits[num % 16];
 		num /= 16;
 	}
-	write(1, "0x", 2);
-	write(1, &buffer[i + 1], 15 - i);
+	write(fd, "0x", 2);
+	write(fd, &buffer[i + 1], 15 - i);
 }

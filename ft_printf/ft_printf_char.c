@@ -6,13 +6,13 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:02:55 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/23 10:27:20 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:04:54 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf_char(char c)
+int	ft_printf_char(int fd,char c)
 {
-	return (write(1, &c, 1));
+	return (write(fd, &c, 1));
 }

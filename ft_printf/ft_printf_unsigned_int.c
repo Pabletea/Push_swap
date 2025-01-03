@@ -6,13 +6,13 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:19:07 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/24 13:31:13 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:06:58 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf_unsigned_int(unsigned int num)
+int	ft_printf_unsigned_int(int fd,unsigned int num)
 {
 	char	buffer[10];
 	int		i;
@@ -28,6 +28,6 @@ int	ft_printf_unsigned_int(unsigned int num)
 		buffer[i--] = (num % 10) + '0';
 		num /= 10;
 	}
-	write(1, &buffer[i + 1], 9 - i);
+	write(fd, &buffer[i + 1], 9 - i);
 	return (9 - i);
 }

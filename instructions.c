@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 11:22:20 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:09:00 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	swap(t_stack **stack)
 	top = *stack;
 	next = top->next;
 	if (!top && !next)
-		ft_printf("Error en el swap");
+		ft_printf(1,"Error en el swap");
 	data = top->data;
 	index = top->index;
 	top->data = next->data;
@@ -40,7 +40,7 @@ int	sa(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("sa", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -50,7 +50,7 @@ int	sb(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("sb", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -62,7 +62,7 @@ int	ss(t_stack **stack_a, t_stack **stack_b)
 	swap(stack_b);
 	ft_putendl_fd("ss", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -99,7 +99,7 @@ int	pa(t_stack **stack_a, t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("pa", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -109,7 +109,7 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("pb", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -134,7 +134,7 @@ int	ra(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("ra", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -144,7 +144,7 @@ int	rb(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("rb", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -156,7 +156,7 @@ int	rr(t_stack **stack_a, t_stack **stack_b)
 	rotate(stack_b);
 	ft_putendl_fd("rr", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -189,7 +189,7 @@ int	rra(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("rra", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -199,7 +199,7 @@ int	rrb(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("rrb", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
 
@@ -211,6 +211,6 @@ int	rrr(t_stack **stack_a, t_stack **stack_b)
 	reverseRotate(stack_b);
 	ft_putendl_fd("rrr", 1);
 	imprimir_estado(stack_a,stack_b);
-	ft_printf("------------------------\n");
+	ft_printf(1,"------------------------\n");
 	return (0);
 }
