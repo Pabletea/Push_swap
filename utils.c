@@ -53,37 +53,45 @@ int isSorted(t_stack **stack)
     return (1);
 }
 
-void sortStack(t_stack **stack_a, t_stack **stack_b)
-{
-    if (!stack_a || !stack_b)
-        return;
-    if (isSorted(stack_a) || stack_len(stack_a) == 1 || stack_len(stack_a) == 0)
-        return; 
-    int stackNodes = stack_len(stack_a);
 
-    if (stackNodes == 2)
-        sa(stack_a,stack_b);
-    else if(stackNodes == 3)
-        sort_three(stack_a,stack_b);
-    else if (stackNodes == 4)
-        sort_four(stack_a,stack_b);
-    else if (stackNodes == 5)
-    {}
-    else if (stackNodes > 5)
-    {}
-}
 
-int getLowestNode(t_stack **stack)
-{
+int getLowestNode(t_stack **stack) {
+    if (*stack == NULL) 
+        return INT_MAX;
     t_stack *current = *stack;
-    int minimun = 0;
-    while(current->next)
-    {
-        if(current->data < current->next->data)
-            minimun = current->data;
+    int minimum = current->data;
+
+    while (current != NULL) {
+        if (current->data < minimum) {
+            minimum = current->data;
+        }
         current = current->next;
     }
-    return (minimun);
+
+    return minimum;
+}
+
+int getRange(t_stack **stack, int value)
+{
+    if (*stack == NULL) {
+        // Handle empty stack case
+        return -1; // Or any appropriate value to indicate error
+    }
+
+    t_stack *current = *stack;
+    int range = 0; 
+
+    while (current != NULL && current->data != value) {
+        range++;
+        current = current->next;
+    }
+
+    // Check if the value was found
+    if (current == NULL) {
+        return -1; // Or any appropriate value to indicate value not found
+    }
+
+    return range;
 }
 
 

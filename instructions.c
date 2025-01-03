@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 10:21:26 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 11:22:20 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	pa(t_stack **stack_a, t_stack **stack_b)
 	if (push(stack_a, stack_b) == -1)
 		return (-1);
 	ft_putendl_fd("pa", 1);
+	imprimir_estado(stack_a,stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -107,6 +109,7 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("pb", 1);
 	imprimir_estado(stack_a,stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -141,6 +144,7 @@ int	rb(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("rb", 1);
 	imprimir_estado(stack_a,stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 
@@ -195,6 +199,7 @@ int	rrb(t_stack **stack_a,t_stack **stack_b)
 		return (-1);
 	ft_putendl_fd("rrb", 1);
 	imprimir_estado(stack_a,stack_b);
+	ft_printf("------------------------\n");
 	return (0);
 }
 

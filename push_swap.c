@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 10:15:10 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:55:09 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         if(isSorted(stack_a))
         {
             free(stack_a);
-            free(stack_a);
+            free(stack_b);
             return (0);
         }else{
             sortStack(stack_a,stack_b);
