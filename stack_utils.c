@@ -37,3 +37,20 @@ t_stack *getLast(t_stack *top)
 
 
 }
+
+int closest_number(t_stack **stack, int min, int max) {
+    t_stack *current = *stack;
+    int best_distance = -1;
+    int closest = -1;
+    while (current) {
+        if (current->data >= min && current->data <= max) {
+            int distance = current->index < stack_len(stack) / 2 ? current->index : stack_len(stack) - current->index;
+            if (best_distance == -1 || distance < best_distance) {
+                best_distance = distance;
+                closest = current->data;
+            }
+        }
+        current = current->next;
+    }
+    return closest;
+}

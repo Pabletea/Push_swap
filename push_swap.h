@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 14:18:21 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 14:56:57 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int getRange(t_stack **stack, int value);
 
 /*------------------------STACK UTILS-------------------*/
 
+int closest_number(t_stack **stack, int min, int max);
+
 /*------------------------LIST UTILS--------------------*/
 
 t_stack				*getLast(t_stack *top);
@@ -80,4 +82,5 @@ t_stack				*getLast(t_stack *top);
 void				sort_three(t_stack **stack_a, t_stack **stack_b);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
 void sort_five(t_stack **stack_a, t_stack **stack_b);
+void insertionSort(t_stack **stack_a, t_stack **stack_b);
 #endif
