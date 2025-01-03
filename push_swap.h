@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 12:11:30 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 14:18:21 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void				initializeStack(t_stack **stack, int *stackValues,
 						int nValues);
 void				imprimir_estado(t_stack **a, t_stack **b);
 int					isSorted(t_stack **stack);
+int getHighestNode(t_stack **stack);
 int					getLowestNode(t_stack **stack);
 void				sortStack(t_stack **stack_a, t_stack **stack_b);
 int getRange(t_stack **stack, int value);
@@ -78,4 +79,5 @@ t_stack				*getLast(t_stack *top);
 
 void				sort_three(t_stack **stack_a, t_stack **stack_b);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
+void sort_five(t_stack **stack_a, t_stack **stack_b);
 #endif

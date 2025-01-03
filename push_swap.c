@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 13:26:18 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:59:51 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
     
     if (stackValues) {
 
-        // ft_printf(1,"ESTADO INICIAL :\n");
-        // imprimir_estado(stack_a,stack_b);        
+        ft_printf(1,"ESTADO INICIAL :\n");
+        imprimir_estado(stack_a,stack_b);        
         if(isSorted(stack_a))
         {
             free(stack_a);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
             sortStack(stack_a,stack_b);
         }
     } else {
-        // ft_printf(2,"Error\n");
+        ft_printf(2,"Error\n");
     }
     return(0);
 }

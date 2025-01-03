@@ -71,8 +71,23 @@ int getLowestNode(t_stack **stack) {
     return minimum;
 }
 
-int getRange(t_stack **stack, int value)
-{
+int getHighestNode(t_stack **stack) {
+    if (*stack == NULL) 
+        return INT_MAX;
+    t_stack *current = *stack;
+    int maximun = current->data;
+
+    while (current != NULL) {
+        if (current->data > maximun) {
+            maximun = current->data;
+        }
+        current = current->next;
+    }
+
+    return maximun;
+}
+
+int getRange(t_stack **stack, int value) {
     if (*stack == NULL) {
         // Handle empty stack case
         return -1; // Or any appropriate value to indicate error
@@ -81,17 +96,16 @@ int getRange(t_stack **stack, int value)
     t_stack *current = *stack;
     int range = 0; 
 
-    while (current != NULL && current->data != value) {
+    while (current != NULL) {
+        if (current->data == value) {
+            return range; 
+        }
         range++;
         current = current->next;
     }
 
-    // Check if the value was found
-    if (current == NULL) {
-        return -1; // Or any appropriate value to indicate value not found
-    }
-
-    return range;
+    // If the loop completes without finding the value
+    return -1; // Or any appropriate value to indicate value not found
 }
 
 
