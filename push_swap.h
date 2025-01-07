@@ -29,10 +29,8 @@ typedef struct s_list
 /*------------------------INSTRUCTIONS------------------------*/
 
 int					swap(t_stack **stack);
-int					sa(t_stack **stack_a, t_stack **stack_b);
-
-int					sb(t_stack **stack_a, t_stack **stack_b);
-
+int	sa(t_stack **stack_a/*,t_stack **stack_b*/);
+int	sb(/*t_stack **stack_a,*/t_stack **stack_b);
 int					ss(t_stack **stack_a, t_stack **stack_b);
 
 int					push(t_stack **stack_orig, t_stack **stack_dest);
@@ -43,17 +41,16 @@ int					pb(t_stack **stack_a, t_stack **stack_b);
 
 int					rotate(t_stack **stack);
 
-int					ra(t_stack **stack_a, t_stack **stack_b);
-
-int					rb(t_stack **stack_a, t_stack **stack_b);
+int					ra(t_stack **stack_a/*, t_stack **stack_b*/);
+int					rb(/*t_stack **stack_a,*/ t_stack **stack_b);
 
 int					rr(t_stack **stack_a, t_stack **stack_b);
 
 int					reverseRotate(t_stack **stack);
 
-int					rra(t_stack **stack_a, t_stack **stack_b);
+int	rra(t_stack **stack_a/*,t_stack **stack_b*/);
 
-int					rrb(t_stack **stack_a, t_stack **stack_b);
+int					rrb(/*t_stack **stack_a, */t_stack **stack_b);
 
 int					rrr(t_stack **stack_a, t_stack **stack_b);
 
@@ -68,6 +65,7 @@ int getHighestNode(t_stack **stack);
 int					getLowestNode(t_stack **stack);
 void				sortStack(t_stack **stack_a, t_stack **stack_b);
 int getRange(t_stack **stack, int value);
+void free_stack(t_stack *stack);
 
 /*------------------------STACK UTILS-------------------*/
 
@@ -79,7 +77,7 @@ t_stack				*getLast(t_stack *top);
 
 /*------------------------ALGORITHM-------------------*/
 
-void				sort_three(t_stack **stack_a, t_stack **stack_b);
+void sort_three(t_stack **stack_a/*,t_stack **stack_b*/);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
 void sort_five(t_stack **stack_a, t_stack **stack_b);
 void sortAlgorithm(t_stack **stack_a, t_stack **stack_b);

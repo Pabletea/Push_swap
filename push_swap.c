@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
         return (-1);
-    
+
     stackValues = (int *)malloc((argc - 1) * sizeof(int));
     if (!stackValues)
         return (0);
@@ -36,15 +36,18 @@ int main(int argc, char *argv[])
 
     *stack_a = NULL;
     *stack_b = NULL;
-    
+
     initializeStack(stack_a,stackValues, (argc-1));
-    
+    free(stackValues);
+
     if (stackValues) {
 
-        ft_printf(1,"ESTADO INICIAL :\n");
-        imprimir_estado(stack_a,stack_b);        
+        // ft_printf(1,"ESTADO INICIAL :\n");
+        // imprimir_estado(stack_a,stack_b);
         if(isSorted(stack_a))
         {
+            free_stack(*stack_a);
+            free_stack(*stack_b);
             free(stack_a);
             free(stack_b);
             return (0);
@@ -54,6 +57,15 @@ int main(int argc, char *argv[])
     } else {
         ft_printf(2,"Error\n");
     }
+
+    // ft_printf(1,"ESTADO FINAL :\n");
+    // imprimir_estado(stack_a,stack_b);
+
+    free_stack(*stack_a);
+    free_stack(*stack_b);
+    free(stack_a);
+    free(stack_b);
+
     return(0);
 }
 
@@ -104,7 +116,7 @@ void imprimir_estado(t_stack **a, t_stack **b) {
 
 int *validate_input(int argc, char *argv[], int *stackValues)
 {
-    int i; 
+    int i;
     int j;
     int z;
     int string_check;

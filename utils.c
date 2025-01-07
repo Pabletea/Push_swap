@@ -108,5 +108,15 @@ int getRange(t_stack **stack, int value) {
     return -1; // Or any appropriate value to indicate value not found
 }
 
+void free_stack(t_stack *stack)
+{
+    t_stack *temp;
+    while(stack){
+        temp = stack->next;
+        free(stack);
+        stack = temp;
+    }
+}
+
 
 
