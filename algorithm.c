@@ -29,7 +29,7 @@ void sortStack(t_stack **stack_a, t_stack **stack_b)
     else if (stackNodes == 5)
         sort_five(stack_a,stack_b);
     else if (stackNodes > 5)
-        insertionSort(stack_a, stack_b);
+        sortAlgorithm(stack_a,stack_b);
 }
 
 void sort_three(t_stack **stack_a,t_stack **stack_b)
@@ -108,35 +108,46 @@ void sort_five(t_stack **stack_a, t_stack **stack_b)
     pa(stack_a,stack_b);
 }
 
-void insertionSort(t_stack **stack_a, t_stack **stack_b)
+void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
-        int chunk_start = 0;
-    
-    while (chunk_start < 100) {
-        int i = 0;
-        while (i < 20) {
-            int min = chunk_start;
-            int max = chunk_start + 19;
-            int value = closest_number(stack_a, min, max);
+    int min;
+    int max;
+    int value;
+    int mid;
+    int rotations;
 
-            // Mover el número más cercano al top de Stack A
-            while ((*stack_a)->data != value) {
-                if (value < stack_len(stack_a) / 2) {
-                    ra(stack_a,stack_b);
-                } else {
-                    rra(stack_a,stack_b);
-                }
-            }
-            pb(stack_a, stack_b);
-            i++;
+    int size = stack_len(stack_a);
+    int size_2 = stack_len(stack_b);
+
+    ft_printf(1, "Stack A len : %d\n",size);
+    ft_printf(1, "Stack B len : %d\n",size_2);
+
+    while(size > 3)
+    {
+        min = getLowestNode(stack_a);
+        max = getHighestNode(stack_a);
+        mid = (min + max) / 2;
+        rotations = 0;
+        // t_stack *temp = *stack_a;
+
+        while(rotations < size / 2)
+        {
+            value = (*stack_a)->data;
+            if (value <= mid)
+                pb(stack_a,stack_b);
+            else
+                ra(stack_a,stack_b);
+            size--;
         }
-        chunk_start += 20;
     }
 
-    // Mover los números de Stack B a Stack A
-    while (*stack_b) {
-        pa(stack_a, stack_b);
-    }
+    ft_printf(1, "Stack A min : %d\n",min);
+    ft_printf(1, "Stack B max : %d\n",max);
+
+
+
+
+    
 }
 
 

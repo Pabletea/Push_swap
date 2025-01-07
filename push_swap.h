@@ -82,5 +82,5 @@ t_stack				*getLast(t_stack *top);
 void				sort_three(t_stack **stack_a, t_stack **stack_b);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
 void sort_five(t_stack **stack_a, t_stack **stack_b);
-void insertionSort(t_stack **stack_a, t_stack **stack_b);
+void sortAlgorithm(t_stack **stack_a, t_stack **stack_b);
 #endif
