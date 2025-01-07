@@ -110,45 +110,43 @@ void sort_five(t_stack **stack_a, t_stack **stack_b)
 
 void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
-    int min;
-    int max;
-    int value;
-    int mid;
-    int rotations;
-
-    int size = stack_len(stack_a);
-    int size_2 = stack_len(stack_b);
-
-    ft_printf(1, "Stack A len : %d\n",size);
-    ft_printf(1, "Stack B len : %d\n",size_2);
-
-    while(size > 3)
-    {
-        min = getLowestNode(stack_a);
-        max = getHighestNode(stack_a);
-        mid = (min + max) / 2;
-        rotations = 0;
-        // t_stack *temp = *stack_a;
-
-        while(rotations < size / 2)
-        {
-            value = (*stack_a)->data;
-            if (value <= mid)
-                pb(stack_a,stack_b);
-            else
+    while (!isSorted(stack_a)) {
+        // Push the smallest elements from `a` to `b` in chunks
+        while (stack_len(stack_a) > 3) {
+            int lowest = getLowestNode(stack_a);
+            while ((*stack_a)->data != lowest) {
+                if (getLowestNode(stack_a) < stack_len(stack_a) / 2)
+                    ra(stack_a,stack_b);  // Rotate until the smallest element is on top
+                else
+                    rra(stack_a,stack_b); // Reverse rotate for efficiency
+            }
+            pb(stack_a, stack_b); // Push the smallest element to stack `b`
+        }
+    
+        if (!isSorted(stack_a)) {
+            if ((*stack_a)->data > (*stack_a)->next->data)
+                sa(stack_a,stack_b);
+            if ((*stack_a)->next->data > (*stack_a)->next->next->data) {
                 ra(stack_a,stack_b);
-            size--;
+                sa(stack_a,stack_b);
+                rra(stack_a,stack_b);
+            }
+            if ((*stack_a)->data > (*stack_a)->next->data)
+                sa(stack_a,stack_b);
+        }
+        while (stack_len(stack_b) > 0) {
+            int highest = getHighestNode(stack_b);
+            while ((*stack_b)->data != highest) {
+                if (getHighestNode(stack_b) < stack_len(stack_b) / 2)
+                    rb(stack_a,stack_b);  // Rotate until the highest element is on top
+                else
+                    rrb(stack_a,stack_b); // Reverse rotate for efficiency
+            }
+            pa(stack_a, stack_b); // Push the highest element back to stack `a`
         }
     }
-
-    ft_printf(1, "Stack A min : %d\n",min);
-    ft_printf(1, "Stack B max : %d\n",max);
-
-
-
-
-    
 }
+
 
 
     
