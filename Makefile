@@ -7,13 +7,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
-DEBUG_FLAGS = -fsanitize=address -g 
+
 
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PRINTF)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:26:13 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/24 13:31:19 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:34:01 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	int	i;
+// size_t	ft_strlen(const char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (*str != '\0')
-	{
-		i++;
-		str++;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	while (*str != '\0')
+// 	{
+// 		i++;
+// 		str++;
+// 	}
+// 	return (i);
+// }
