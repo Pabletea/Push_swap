@@ -13,7 +13,6 @@
 - [Requisitos](#requisitos)
 - [Compilación](#compilación)
 - [Instrucciones Permitidas](#instrucciones-permitidas)
-- [Estructura del Proyecto](#estructura-del-proyecto)
 - [Optimización](#optimización)
 - [Autor](#autor)
 
@@ -59,14 +58,3 @@ El programa debe operar exclusivamente con las siguientes instrucciones:
 
 ---
 
-## Estructura del Proyecto
-
-push_swap/
-├── includes/            # Archivos de cabecera (.h)
-├── src/                 # Archivos fuente (.c)
-│   ├── push_swap.c      # Punto de entrada
-│   ├── instructions.c/  # Implementación de operaciones (sa, pb, etc.)
-│   ├── algorithms/      # Algoritmos de ordenamiento
-│   ├── utils/           # Funciones auxiliares
-├── Makefile             # Script para compilación
-├── README.md            # Documentación del proyecto
