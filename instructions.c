@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 13:07:48 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:16:18 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	swap(t_stack **stack)
 {
-	t_stack	*top;
+	t_stack	*first;
 	t_stack	*next;
 	int		data;
 	int		index;
 
 	if (stack_len(stack) < 2 || !stack)
 		return (-1);
-	top = *stack;
-	next = top->next;
-	if (!top && !next)
-		// ft_printf(1,"Error en el swap");
-	data = top->data;
-	index = top->index;
-	top->data = next->data;
-	top->index = next->index;
+	first = *stack;
+	next = first->next;
+	if (!first && !next)
+		return (-1);
+	data = first->data;
+	index = first->index;
+	first->data = next->data;
+	first->index = next->index;
 	next->data = data;
 	next->index = index;
 	return (0);

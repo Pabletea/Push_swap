@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 12:59:55 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:31:08 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int main(int argc, char *argv[])
 
     if (stackValues != NULL) {
 
-        ft_printf(1,"ESTADO INICIAL :\n");
-        imprimir_estado(stack_a,stack_b);
+        // ft_printf(1,"ESTADO INICIAL :\n");
+        // imprimir_estado(stack_a,stack_b);
         if(isSorted(stack_a))
         {
             free_stack(*stack_a);
@@ -110,8 +110,8 @@ int main(int argc, char *argv[])
     }
     free(stackValues);
 
-    ft_printf(1,"ESTADO FINAL :\n");
-    imprimir_estado(stack_a,stack_b);
+    // ft_printf(1,"ESTADO FINAL :\n");
+    // imprimir_estado(stack_a,stack_b);
 
     free_stack(*stack_a);
     free_stack(*stack_b);

@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 12:42:36 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:27:42 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void sort_five(t_stack **stack_a, t_stack **stack_b)
 
 void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
-    ft_printf(1,"Sort MORE");
+    // ft_printf(1,"Sort MORE");
     while (!isSorted(stack_a)) {
         // Push the smallest elements from `a` to `b` in chunks
         while (stack_len(stack_a) > 3) {
