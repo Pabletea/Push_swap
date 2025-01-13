@@ -24,7 +24,11 @@ typedef struct s_list
 {
 	int				data;
 	int				index;
+	int				push_cost;
+	int				above_median;
+	int				is_cheapiest;
 	struct s_list	*next;
+	struct s_list	*prev;
 }					t_stack;
 /*------------------------INSTRUCTIONS------------------------*/
 

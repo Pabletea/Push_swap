@@ -26,9 +26,7 @@ void sortStack(t_stack **stack_a, t_stack **stack_b)
         sort_three(stack_a/*,stack_b*/);
     else if (stackNodes == 4)
         sort_four(stack_a,stack_b);
-    else if (stackNodes == 5)
-        sort_five(stack_a,stack_b);
-    else if (stackNodes > 5)
+    else if (stackNodes >= 5)
         sortAlgorithm(stack_a,stack_b);
 }
 
@@ -113,44 +111,50 @@ void sort_five(t_stack **stack_a, t_stack **stack_b)
 
 void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
-    // ft_printf(1,"Sort MORE");
-    while (!isSorted(stack_a)) {
-        // Push the smallest elements from `a` to `b` in chunks
-        while (stack_len(stack_a) > 3) {
-            int lowest = getLowestNode(stack_a);
-            while ((*stack_a)->data != lowest) {
-                if (getLowestNode(stack_a) < stack_len(stack_a) / 2)
-                    ra(stack_a/*,stack_b*/);  // Rotate until the smallest element is on top
-                else
-                    rra(stack_a/*,stack_b*/); // Reverse rotate for efficiency
-            }
-            pb(stack_a, stack_b); // Push the smallest element to stack `b`
-        }
-    
-        if (!isSorted(stack_a)) {
-            if ((*stack_a)->data > (*stack_a)->next->data)
-                        sa(stack_a/*,stack_b*/);
-            if ((*stack_a)->next->data > (*stack_a)->next->next->data) {
-                ra(stack_a/*,stack_b*/);
-                        sa(stack_a/*,stack_b*/);
-                rra(stack_a/*,stack_b*/);
-            }
-            if ((*stack_a)->data > (*stack_a)->next->data)
-                        sa(stack_a/*,stack_b*/);
-        }
-        while (stack_len(stack_b) > 0) {
-            int highest = getHighestNode(stack_b);
-            while ((*stack_b)->data != highest) {
-                if (getHighestNode(stack_b) < stack_len(stack_b) / 2)
-                    rb(/*stack_a,*/stack_b);  // Rotate until the highest element is on top
-                else
-                    rrb(/*stack_a,*/stack_b); // Reverse rotate for efficiency
-            }
-            pa(stack_a, stack_b); // Push the highest element back to stack `a`
-        }
+    int len_a;
+
+    len_a = stack_len(stack_a);
+
+    if (len_a-- > 3 && !isSorted(stack_a))
+        pb (stack_a,stack_b);
+    if (len_a-- > 3 && !isSorted(stack_a))
+        pb (stack_a,stack_b);
+    while(len_a-- > 3 && !isSorted(stack_a))
+    {
+
+    }
+
+}
+
+void init_nodes_a(t_stack *a,t_stack *b)
+{
+
+}
+
+void current_index(t_stack **stack_a,t_stack *stack)
+{
+    int i;
+    int median;
+    i = 0;
+    if (!stack)
+        return;
+    median = stack_len(stack_a);
+    while(stack)
+    {
+        stack->index = i;
+        if (i <= median)
+            stack->above_median = 1;
+        else
+            stack->above_median = 0;
+        stack = stack->next;
+        i++;
     }
 }
 
+static void set_target_a(t_stack **stack_a, t_stack **stack_b,t_stack *a, t_stack *b)
+{
+
+}
 
 
     
