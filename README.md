@@ -4,7 +4,6 @@
 
 **Push Swap** es un proyecto diseñado para implementar y optimizar un conjunto de algoritmos que ordenan una pila de números enteros utilizando un conjunto limitado de instrucciones. El objetivo principal es minimizar el número de movimientos necesarios para lograr un ordenamiento correcto.
 
-Este proyecto se desarrolla como parte del currículo de la escuela 42, y pone a prueba habilidades como la comprensión de estructuras de datos, la optimización de algoritmos y el manejo eficiente de memoria.
 
 ---
 
