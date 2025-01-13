@@ -24,7 +24,6 @@
 - Ordena una pila de números enteros utilizando un conjunto limitado de instrucciones.
 - Implementación de algoritmos eficientes de ordenamiento como **radix sort** o **quick sort**, adaptados al conjunto de operaciones permitido.
 - Diseñado para funcionar con pilas pequeñas y medianas (hasta 500 elementos).
-- Compatible con el marco de evaluación de 42 para validar eficiencia y corrección.
 
 ---
 
