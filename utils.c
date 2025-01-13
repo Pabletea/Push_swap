@@ -1,4 +1,5 @@
 #include "push_swap.h"
+t_stack *create_node(int data, int index);
 
 int stack_len(t_stack **stack)
 {
@@ -17,25 +18,19 @@ void initializeStack(t_stack **stack, int *stackValues, int nValues)
 {
     if (!stack || !stackValues || nValues <= 0)
         return;
-    *stack = NULL; // Inicializa la pila
+    t_stack *new_node;
+    t_stack *current = NULL;
     int i = 0;
-    while (i < nValues)
+    while(i < nValues)
     {
-        t_stack *newNode = (t_stack *)malloc(sizeof(t_stack));
-        if (!newNode)
-        {
-            while (*stack) // En caso de error, libera todos los nodos ya reservados
-            {
-                t_stack *temp = *stack;
-                *stack = (*stack)->next;
-                free(temp);
-            }
+        new_node = create_node(stackValues[i],i);
+        if (!new_node)
             return;
-        }
-        newNode->data = stackValues[i]; // Inicializar el nuevo nodo
-        newNode->index = i; // Opcional: asignar un índice
-        newNode->next = *stack;
-        *stack = newNode; // Actualizar la cima de la pila
+        if (*stack == NULL)
+            *stack = new_node;
+        else
+            current->next = new_node;
+        current = new_node;
         i++;
     }
 }
@@ -116,6 +111,17 @@ void free_stack(t_stack *stack)
         free(stack);
         stack = temp;
     }
+}
+
+t_stack *create_node(int data, int index)
+{
+    t_stack *new_node = (t_stack *)malloc(sizeof(t_stack));
+    if (!new_node)
+        return NULL;
+    new_node->data = data;
+    new_node->index = index;
+    new_node->next = NULL;
+    return new_node;
 }
 
 

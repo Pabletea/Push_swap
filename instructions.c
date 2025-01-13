@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 14:00:41 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:07:48 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	swap(t_stack **stack)
 	int		data;
 	int		index;
 
-	if (stack_len(stack) < 2)
+	if (stack_len(stack) < 2 || !stack)
 		return (-1);
 	top = *stack;
 	next = top->next;
@@ -38,8 +38,6 @@ int	sa(t_stack **stack_a/*,t_stack **stack_b*/)
 {
 	if (swap(stack_a) == -1)
 		return (-1);
-	// ft_putendl_fd("sa", 1);
-	// imprimir_estado(stack_a,stack_b);
 	ft_printf(1,"sa\n");
 	return (0);
 }
@@ -107,8 +105,6 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	if (push(stack_b, stack_a) == -1)
 		return (-1);
-	// ft_putendl_fd("pb", 1);
-	// imprimir_estado(stack_a,stack_b);
 	ft_printf(1,"pb\n");
 	return (0);
 }

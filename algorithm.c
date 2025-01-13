@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 14:57:12 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:42:36 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void sortStack(t_stack **stack_a, t_stack **stack_b)
 
 void sort_three(t_stack **stack_a/*,t_stack **stack_b*/)
 {
+    // ft_printf(1,"Sort three\n");
     t_stack *current = *stack_a;
 
     if (current->data > current->next->data && current->data > current->next->next->data)
@@ -48,6 +49,7 @@ void sort_three(t_stack **stack_a/*,t_stack **stack_b*/)
 
 void sort_four(t_stack **stack_a, t_stack **stack_b)
 {
+    // ft_printf(1,"Sort four\n");
     if (isSorted(stack_a))
         return;
     int range = getRange(stack_a,getLowestNode(stack_a));
@@ -67,6 +69,7 @@ void sort_four(t_stack **stack_a, t_stack **stack_b)
 }
 void sort_five(t_stack **stack_a, t_stack **stack_b)
 {
+    // ft_printf(1,"Sort five\n");
     if (isSorted(stack_a))
         return;
     int lowestNode = getLowestNode(stack_a);
@@ -110,6 +113,7 @@ void sort_five(t_stack **stack_a, t_stack **stack_b)
 
 void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
+    ft_printf(1,"Sort MORE");
     while (!isSorted(stack_a)) {
         // Push the smallest elements from `a` to `b` in chunks
         while (stack_len(stack_a) > 3) {

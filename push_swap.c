@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/09 15:48:28 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:59:55 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ char	*arguments_union(char **argv);
 static void	free_all_memory(char *argv_union, char **arr_arguments);
 static int	check_arguments(char **argv);
 void convert_strings_to_integers(const char *strArray[], int intArray[], int size);
+int	is_valid_number(char *str);
+int	is_valid_integer_value(char *str);
+long	ft_atol(const char *nptr);
+size_t ft_sizeof(char **array);
 
 int main(int argc, char *argv[])
 {
@@ -40,45 +44,71 @@ int main(int argc, char *argv[])
     megaArgv = arguments_union(argv);
     valoresArgumentos = ft_split(megaArgv,' ');
 
+    stack_a = (t_stack **)malloc(sizeof(t_stack));
+    stack_b = (t_stack **)malloc(sizeof(t_stack));
+
     *stack_a = NULL;
     *stack_b = NULL;
 
     if (!check_arguments(valoresArgumentos))
         return(free_all_memory(megaArgv,valoresArgumentos),0);
-    
-    int size = sizeof(valoresArgumentos) / sizeof(valoresArgumentos[0]);
-    int stackValues[size];
-    
-    convert_strings_to_integers(valoresArgumentos,stackValues,size);
-    
 
-    ft_printf(1,"Cadena coon todos los argumentos = %s",megaArgv);
+    int size = 0;
+    while(valoresArgumentos[size]  != NULL)
+        size++;
 
-    stack_a = (t_stack **)malloc(sizeof(t_stack));
-    stack_b = (t_stack **)malloc(sizeof(t_stack));
+    int *stackValues = (int *)malloc(sizeof(int) * size);
+    if (!stackValues)
+        return (1);
+    int i = 0;
+
+    while (i < size)
+    {
+        stackValues[i] = ft_atoi(valoresArgumentos[i]);
+        i++;
+    }
+
+    // printf("Array de enteros:\n");
+    // i = 0;
+    // int end = size;
+    // while (end > 0) {
+    //     printf("%d ", stackValues[i]);
+    //     i++;
+    //     end--;
+    // }
+    // printf("\n");
 
 
 
-    initializeStack(stack_a,stackValues, (argc-1));
-    free(stackValues);
 
-    if (stackValues) {
+    // ft_printf(1,"Cadena con todos los argumentos = %s\n",megaArgv);
+    // ft_printf(1,"Tamaño de array %d",size);
+
+
+
+
+
+    initializeStack(stack_a,stackValues,size);
+
+
+    if (stackValues != NULL) {
 
         ft_printf(1,"ESTADO INICIAL :\n");
         imprimir_estado(stack_a,stack_b);
-        // if(isSorted(stack_a))
-        // {
-        //     free_stack(*stack_a);
-        //     free_stack(*stack_b);
-        //     free(stack_a);
-        //     free(stack_b);
-        //     return (0);
-        // }else{
-        //     sortStack(stack_a,stack_b);
-        // }
+        if(isSorted(stack_a))
+        {
+            free_stack(*stack_a);
+            free_stack(*stack_b);
+            free(stack_a);
+            free(stack_b);
+            return (0);
+        }else{
+            sortStack(stack_a,stack_b);
+        }
     } else {
         ft_printf(2,"Error\n");
     }
+    free(stackValues);
 
     ft_printf(1,"ESTADO FINAL :\n");
     imprimir_estado(stack_a,stack_b);
@@ -93,44 +123,22 @@ int main(int argc, char *argv[])
 
 
 void imprimir_estado(t_stack **a, t_stack **b) {
-    t_stack *current_a = *a;
-    t_stack *current_b = *b;
-    int max_height = 0;
-
-    // Determinar la altura máxima entre ambas pilas
-    t_stack *temp_a = *a;
-    t_stack *temp_b = current_b;
-    while (temp_a != NULL) {
-        max_height++;
-        temp_a = temp_a->next;
+    t_stack *current = *a;  // Desreferenciamos el puntero doble para obtener el stack
+    printf("Stack:\n");
+    while (current)
+    {
+        printf("| Data: %d | Index: %d |\n", current->data, current->index);
+        current = current->next;
     }
-    while (temp_b != NULL) {
-        max_height++;
-        temp_b = temp_b->next;
+    printf("NULL\n");
+    t_stack *current_b = *b;  // Desreferenciamos el puntero doble para obtener el stack
+    printf("Stack:\n");
+    while (current_b)
+    {
+        printf("| Data: %d | Index: %d |\n", current_b->data, current_b->index);
+        current_b = current_b->next;
     }
-
-    // Imprimir las pilas en columnas
-    for (int i = 0; i < max_height; i++) {
-        if (current_a != NULL) {
-            printf("| %d ", current_a->data);
-            current_a = current_a->next;
-        } else {
-            printf("|    "); // Espacio vacío para pila a
-        }
-
-        if (current_b != NULL) {
-            printf("| %d ", current_b->data);
-            current_b = current_b->next;
-        } else {
-            printf("|   "); // Espacio vacío para pila b
-        }
-
-        printf("|\n");
-    }
-
-    // Imprimir el nombre de cada pila debajo
-    printf("|----|---|\n");
-    printf("  a    b \n");
+    printf("NULL\n");
 }
 
 
@@ -286,11 +294,11 @@ int	is_valid_number(char *str)
 		return (0);
 	if (str[i] == '+' || str[i] == '-')
 		i++;
-	if (!isdigit(str[i]))
+	if (!ft_isdigit(str[i]))
 		return (0);
 	while (str[i])
 	{
-		if (!isdigit(str[i]))
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
@@ -335,13 +343,13 @@ long	ft_atol(const char *nptr)
 	}
 	return (n * s);
 }
-size_t ft_sizeof(int *array) {
-    size_t size = 0;
-    while (array[size] != '\0') {
-        size++;
-    }
-    return size * sizeof(int); // Multiplica por el tamaño de cada elemento (int)
-}
+// size_t ft_sizeof(char **array) {
+//     size_t size = 0;
+//     while (array[size] != '\0') {
+//         size++;
+//     }
+//     return size * sizeof(int); // Multiplica por el tamaño de cada elemento (int)
+// }
 
 void convert_strings_to_integers(const char *strArray[], int intArray[], int size) {
     int i = 0;
