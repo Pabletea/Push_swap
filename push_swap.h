@@ -28,6 +28,7 @@ typedef struct s_list
 	int				above_median;
 	int				is_cheapiest;
 	struct s_list	*next;
+	struct s_list	*target_node;
 	struct s_list	*prev;
 }					t_stack;
 /*------------------------INSTRUCTIONS------------------------*/

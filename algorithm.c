@@ -12,6 +12,14 @@
 
 #include "push_swap.h"
 
+static void current_index(t_stack **stack_a,t_stack *stack);
+static void init_nodes_a(t_stack **stack_a,t_stack **stack_b,t_stack *a,t_stack *b);
+static void set_target_a(t_stack *a, t_stack *b);
+static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b, t_stack *a);
+static void set_cheapest(t_stack **stack);
+static void move_a_to_b(t_stack **stack_a, t_stack **stack_b);
+
+
 void sortStack(t_stack **stack_a, t_stack **stack_b)
 {
     if (!stack_a || !stack_b)
@@ -114,6 +122,8 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
     int len_a;
 
     len_a = stack_len(stack_a);
+    t_stack *current_b = *stack_b;
+    t_stack *current_a = *stack_a;
 
     if (len_a-- > 3 && !isSorted(stack_a))
         pb (stack_a,stack_b);
@@ -121,17 +131,29 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
         pb (stack_a,stack_b);
     while(len_a-- > 3 && !isSorted(stack_a))
     {
-
+        init_nodes_a(stack_a,stack_b,*stack_a,*stack_b);
+        move_a_to_b(stack_a,stack_b);
     }
+    sort_three(stack_a);
+    while(current_b)
+    {
+        init_nodes_b
+    }
+    current_index(stack_a,current_a);
+
 
 }
 
-void init_nodes_a(t_stack *a,t_stack *b)
+static void init_nodes_a(t_stack **stack_a,t_stack **stack_b,t_stack *a,t_stack *b)
 {
-
+    current_index(stack_a,a);
+    current_index(stack_b,b);
+    set_target_a(a,b);
+    cost_analysis_a(stack_a,stack_b,a);
+    set_cheapest(stack_a);
 }
 
-void current_index(t_stack **stack_a,t_stack *stack)
+static void current_index(t_stack **stack_a,t_stack *stack)
 {
     int i;
     int median;
@@ -151,8 +173,144 @@ void current_index(t_stack **stack_a,t_stack *stack)
     }
 }
 
-static void set_target_a(t_stack **stack_a, t_stack **stack_b,t_stack *a, t_stack *b)
+static void set_target_a(t_stack *a, t_stack *b)
 {
+    t_stack *current_b;
+    t_stack *target_node;
+    long    best_match_index;
+
+    while(a)
+    {
+        best_match_index = LONG_MIN;
+        current_b = b;
+        while(current_b)
+        {
+            if (current_b->data < a->data && current_b->data > best_match_index)
+            {
+                best_match_index = current_b->index;
+                target_node = current_b;
+            }
+            current_b = current_b->next;
+        }
+        if (best_match_index == LONG_MIN)
+            a->target_node = target_node;
+        a = a->next;
+    }
+}
+
+static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b, t_stack *a)
+{
+    int len_a;
+    int len_b;
+
+    len_a = stack_len(stack_a);
+    len_b = stack_len(stack_b);
+
+    while(a)
+    {
+        a->push_cost = a->index;
+        if (!(a->above_median))
+            a->push_cost = len_a - (a->index);
+        if (a->target_node->above_median)
+            a->push_cost += a->target_node->index;
+        else
+            a->push_cost += len_b - (a->target_node->index);
+        a = a->next;
+    }
+}
+
+static void set_cheapest(t_stack **stack)
+{
+    t_stack *current;
+    int cheapiest_value;
+    t_stack *cheapiest_node;
+    current = *stack;
+
+    if (!stack)
+        return;
+    cheapiest_value = INT_MAX;
+    while(current)
+    {
+        if (current->push_cost < cheapiest_value)
+        {
+            cheapiest_value = current->push_cost;
+            cheapiest_node = current;
+        }
+        current = current->next;
+        cheapiest_node->is_cheapiest = 1;
+    }
+}
+
+
+static void move_a_to_b(t_stack **stack_a, t_stack **stack_b)
+{
+    t_stack *cheapiest_node;
+
+    cheapiest_node = get_cheapest(*stack_a);
+    if (cheapiest_node->above_median && cheapiest_node->target_node->above_median)
+        rotate_both(stack_a,stack_b,cheapiest_node);
+    else if (!(cheapiest_node->above_median) && !(cheapiest_node->target_node->above_median))
+        rev_rotate_both(stack_a,stack_b,cheapiest_node);
+    prep_for_push(stack_a,cheapiest_node, 'a');
+    prep_for_push(stack_b,cheapiest_node, 'b');
+    pb(stack_a,stack_b);
+
+
+}
+
+
+t_stack *get_cheapiest(t_stack **stack)
+{
+    if (!stack)
+        reurn (NULL);
+    t_stack *current = *stack;
+    while(current)
+    {
+        if (current->is_cheapiest)
+            return(current);
+        current = current->next;
+    }
+    return (NULL);
+}
+
+void rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
+{
+    t_stack *current_a = *stack_a;
+    t_stack *current_b = *stack_b;
+    while(current_b != cheapiest_node->target_node && current_a != cheapiest_node)
+        rr(stack_a,stack_b);
+    current_index(stack_a,current_a);
+    current_index(stack_b,current_b);
+
+}
+
+void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name)
+{
+    t_stack *current = *stack;
+    while(current)
+    {
+        if (stack_name = 'a')
+        {
+            if (top_node->above_median)
+                ra(stack);
+            else
+                rra(stack);
+        }
+        else if (stack_name = 'b')
+        {
+            if (top_node->above_median)
+                rb(stack);
+            else
+                rrb(stack);
+        }
+    }
+}
+
+void init_nodes_b(t_stack **stack_a, t_stack **stack_b,t_stack *a, t_stack *b)
+{
+    current_index(stack_a,a);
+    current_index(stack_b,b);
+    set_target_b();
 
 }
 
