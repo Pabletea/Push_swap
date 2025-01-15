@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 14:02:32 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:08:51 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,8 @@ static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b)
     len_b = stack_len(stack_b);
     t_stack *a = *stack_a;
 
-
+    imprimir_estado(stack_a,stack_a);
+    printf("-------------------");
     while(a)
     {
         a->push_cost = a->index;
