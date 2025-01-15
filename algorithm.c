@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 13:27:42 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:31:19 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ static void set_target_a(t_stack *a, t_stack *b);
 static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b, t_stack *a);
 static void set_cheapest(t_stack **stack);
 static void move_a_to_b(t_stack **stack_a, t_stack **stack_b);
-
+void init_nodes_b(t_stack **stack_a, t_stack **stack_b,t_stack *a, t_stack *b);
+void rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node);
+t_stack *get_cheapest(t_stack **stack);
+void rev_rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node);
+void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name);
+t_stack *find_min(t_stack *stack);
+void set_target_b(t_stack *a, t_stack *b);
 
 void sortStack(t_stack **stack_a, t_stack **stack_b)
 {
@@ -137,7 +143,7 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
     sort_three(stack_a);
     while(current_b)
     {
-        init_nodes_b
+        init_nodes_b(stack_a,stack_b,*stack_a,*stack_b);
     }
     current_index(stack_a,current_a);
 
@@ -246,7 +252,7 @@ static void move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 {
     t_stack *cheapiest_node;
 
-    cheapiest_node = get_cheapest(*stack_a);
+    cheapiest_node = get_cheapest(stack_a);
     if (cheapiest_node->above_median && cheapiest_node->target_node->above_median)
         rotate_both(stack_a,stack_b,cheapiest_node);
     else if (!(cheapiest_node->above_median) && !(cheapiest_node->target_node->above_median))
@@ -262,7 +268,7 @@ static void move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 t_stack *get_cheapiest(t_stack **stack)
 {
     if (!stack)
-        reurn (NULL);
+        return (NULL);
     t_stack *current = *stack;
     while(current)
     {
@@ -289,14 +295,14 @@ void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name)
     t_stack *current = *stack;
     while(current)
     {
-        if (stack_name = 'a')
+        if (stack_name == 'a')
         {
             if (top_node->above_median)
                 ra(stack);
             else
                 rra(stack);
         }
-        else if (stack_name = 'b')
+        else if (stack_name == 'b')
         {
             if (top_node->above_median)
                 rb(stack);
@@ -310,10 +316,81 @@ void init_nodes_b(t_stack **stack_a, t_stack **stack_b,t_stack *a, t_stack *b)
 {
     current_index(stack_a,a);
     current_index(stack_b,b);
-    set_target_b();
+    set_target_b(a,b);
 
 }
 
 
     
 
+t_stack *get_cheapest(t_stack **stack)
+{
+    if (!stack)
+        return (NULL);
+    while(stack)
+    {
+        if ((*stack)->is_cheapiest)
+            return ((*stack));
+        (*stack) = (*stack)->next;
+        
+    }
+    return (NULL);
+}
+
+
+void rev_rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
+{
+    while(*stack_b != cheapiest_node->target_node && *stack_a != cheapiest_node)
+        rrr(stack_a,stack_a);
+    current_index(stack_a,*stack_a);
+    current_index(stack_b,*stack_b);
+}
+
+
+void set_target_b(t_stack *a, t_stack *b)
+{
+    t_stack *current_a;
+    t_stack *target_node;
+    int     best_match_index;
+
+    while(b)
+    {
+        best_match_index = INT_MAX;
+        current_a = a;
+        while (current_a)
+        {
+            if (current_a->data > b->data && current_a->data < best_match_index)
+            {
+                best_match_index = current_a->data;
+                target_node = current_a;
+            }
+            current_a = current_a->next;
+        }
+        if (best_match_index == INT_MAX)
+            b->target_node = find_min(a);
+        else
+            b->target_node = target_node;
+        b = b->next;
+        
+    }
+}
+
+t_stack *find_min(t_stack *stack)
+{
+    int min;
+    t_stack *min_node;
+
+    if (!stack)
+        return (NULL);
+    min = INT_MAX;
+    while(stack)
+    {
+        if (stack->data < min)
+        {
+            min = stack->data;
+            min_node = stack;
+        }
+        stack = stack->next;
+    }
+    return (min_node);
+}
