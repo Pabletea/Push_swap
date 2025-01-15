@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 15:21:00 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:24:27 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 
     len_a = stack_len(stack_a);
     imprimir_estado(stack_a,stack_b);
+    printf("LEN: %d",len_a);
     exit(1);
 
     if (len_a-- > 3 && !isSorted(stack_a))
