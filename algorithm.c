@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 14:08:51 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:21:00 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
     int len_a;
 
     len_a = stack_len(stack_a);
+    imprimir_estado(stack_a,stack_b);
+    exit(1);
 
     if (len_a-- > 3 && !isSorted(stack_a))
         pb (stack_a,stack_b);     
@@ -153,10 +155,7 @@ void init_nodes_a(t_stack **stack_a,t_stack **stack_b)
     current_index(stack_b);
     set_target_a(stack_a,stack_b);
     cost_analysis_a(stack_a,stack_b);
-    printf("Hola");
-    exit(1);
     set_cheapest(stack_a);
-    imprimir_estado(stack_a,stack_b);
 }
 
 static void current_index(t_stack **stack_a)
@@ -217,8 +216,6 @@ static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b)
     len_b = stack_len(stack_b);
     t_stack *a = *stack_a;
 
-    imprimir_estado(stack_a,stack_a);
-    printf("-------------------");
     while(a)
     {
         a->push_cost = a->index;

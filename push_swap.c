@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 13:15:23 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:23:16 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,28 @@ void imprimir_estado(t_stack **a, t_stack **b) {
     printf("Stack A:\n");
     while (current)
     {
+        if (current->target_node)
+        {
         printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", current->data, current->index,current->push_cost,current->above_median,current->is_cheapiest,current->target_node->data);
+        }else
+        {
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", current->data, current->index,current->push_cost,current->above_median,current->is_cheapiest);  
+        }
         current = current->next;
+
     }
     printf("NULL\n");
     t_stack *current_b = *b;  // Desreferenciamos el puntero doble para obtener el stack
     printf("Stack B:\n");
     while (current_b)
     {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d |\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest);
+        if (current_b->target_node)
+        {
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest,current_b->target_node->data);
+        }else
+        {
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest);  
+        }
         current_b = current_b->next;
     }
     printf("NULL\n");
