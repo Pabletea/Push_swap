@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 13:31:08 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:06:25 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 
 void imprimir_estado(t_stack **a, t_stack **b) {
     t_stack *current = *a;  // Desreferenciamos el puntero doble para obtener el stack
-    printf("Stack:\n");
+    printf("Stack A:\n");
     while (current)
     {
         printf("| Data: %d | Index: %d |\n", current->data, current->index);
@@ -132,7 +132,7 @@ void imprimir_estado(t_stack **a, t_stack **b) {
     }
     printf("NULL\n");
     t_stack *current_b = *b;  // Desreferenciamos el puntero doble para obtener el stack
-    printf("Stack:\n");
+    printf("Stack B:\n");
     while (current_b)
     {
         printf("| Data: %d | Index: %d |\n", current_b->data, current_b->index);

@@ -45,6 +45,7 @@ int isSorted(t_stack **stack)
             return (0);
         current = current->next;
     }
+
     return (1);
 }
 
