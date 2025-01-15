@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 12:06:25 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:15:23 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int main(int argc, char *argv[])
 
     if (stackValues != NULL) {
 
-        ft_printf(1,"ESTADO INICIAL :\n");
-        imprimir_estado(stack_a,stack_b);
+        // ft_printf(1,"ESTADO INICIAL :\n");
+        // imprimir_estado(stack_a,stack_b);
         if(isSorted(stack_a))
         {
             free_stack(*stack_a);
@@ -110,8 +110,8 @@ int main(int argc, char *argv[])
     }
     free(stackValues);
 
-    ft_printf(1,"ESTADO FINAL :\n");
-    imprimir_estado(stack_a,stack_b);
+    // ft_printf(1,"ESTADO FINAL :\n");
+    // imprimir_estado(stack_a,stack_b);
 
     free_stack(*stack_a);
     free_stack(*stack_b);
@@ -127,7 +127,7 @@ void imprimir_estado(t_stack **a, t_stack **b) {
     printf("Stack A:\n");
     while (current)
     {
-        printf("| Data: %d | Index: %d |\n", current->data, current->index);
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", current->data, current->index,current->push_cost,current->above_median,current->is_cheapiest,current->target_node->data);
         current = current->next;
     }
     printf("NULL\n");
@@ -135,7 +135,7 @@ void imprimir_estado(t_stack **a, t_stack **b) {
     printf("Stack B:\n");
     while (current_b)
     {
-        printf("| Data: %d | Index: %d |\n", current_b->data, current_b->index);
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d |\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest);
         current_b = current_b->next;
     }
     printf("NULL\n");
