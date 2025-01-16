@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/15 15:36:02 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:06:27 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name);
 t_stack *find_min(t_stack *stack);
 void set_target_b(t_stack *a, t_stack *b);
 t_stack *find_max(t_stack *stack);
+void min_on_top(t_stack **stack);
+void move_b_to_a(t_stack **stack_a, t_stack **stack_b);
 
 void sortStack(t_stack **stack_a, t_stack **stack_b)
 {
@@ -128,26 +130,42 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 {
     int len_a;
 
+
     len_a = stack_len(stack_a);
-    if (len_a-- > 3 && !isSorted(stack_a))
+    if (len_a-- > 3)
         pb (stack_a,stack_b);
-    if (len_a-- > 3 && !isSorted(stack_a))
+    if (len_a-- > 3)
         pb (stack_a,stack_b);
+    //BREAKPOINT AFTER 2 PB-----------------------------------------------------------------------------------------------------------------------//
+    printf("BREAKPOINT AFTER 2 PB-----------------------------------------------------------------------------------------------------------------------\n");
     imprimir_estado(stack_a,stack_b);
-    printf("LEN: %d",len_a);
-    while(len_a-- > 3 && !isSorted(stack_a))
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
+    while(len_a-- > 3)
     {
-        printf("TEST");
-        exit(1);  
         init_nodes_a(stack_a,stack_b);
+        printf("BREAKPOINT AFTER INI NODES A-----------------------------------------------------------------------------------------------------------------------\n");
+        imprimir_estado(stack_a,stack_b);
+        printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
+        // exit(0);
         move_a_to_b(stack_a,stack_b);
+        printf("BREAKPOINT AFTER MOVE A TO B-----------------------------------------------------------------------------------------------------------------------\n");
+        imprimir_estado(stack_a,stack_b);
+        printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
+        exit(0);
+        
     }
+    printf("BREAKPOINT AFTER STACK_LEN(STACK_A) == 3-----------------------------------------------------------------------------------------------------------------------\n");
+    imprimir_estado(stack_a,stack_b);
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
     sort_three(stack_a);
     while(*stack_b)
     {
         init_nodes_b(stack_a,stack_b,*stack_a,*stack_b);
+        move_b_to_a(stack_a,stack_b);
     }
+
     current_index(stack_a);
+    min_on_top(stack_a);
 }
 
 void init_nodes_a(t_stack **stack_a,t_stack **stack_b)
@@ -166,7 +184,7 @@ static void current_index(t_stack **stack_a)
     i = 0;
     if (!stack_a)
         return;
-    median = stack_len(stack_a);
+    median = stack_len(stack_a) / 2;
     t_stack *node = *stack_a;
     while(node)
     {
@@ -225,12 +243,10 @@ static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b)
 
         if (a->target_node->above_median == 1)
         {
-            ft_printf(1,"CASO 1");
             a->push_cost += a->target_node->index;
         }
         else
         {
-            ft_printf(1,"CASO 2");
             a->push_cost += len_b - (a->target_node->index);
         }
         a = a->next;
@@ -263,11 +279,14 @@ static void move_a_to_b(t_stack **stack_a, t_stack **stack_b)
     t_stack *cheapiest_node;
 
     cheapiest_node = get_cheapest(stack_a);
-    if (cheapiest_node->above_median && cheapiest_node->target_node->above_median)
+    if (cheapiest_node->above_median == 1 && cheapiest_node->target_node->above_median == 1)
         rotate_both(stack_a,stack_b,cheapiest_node);
-    else if (!(cheapiest_node->above_median) && !(cheapiest_node->target_node->above_median))
+    else if (cheapiest_node->above_median == 0 && cheapiest_node->target_node->above_median == 0)
         rev_rotate_both(stack_a,stack_b,cheapiest_node);
-    prep_for_push(stack_a,cheapiest_node, 'a');
+    printf("BREAKPOINT INSIDE MOVE A TO B-----------------------------------------------------------------------------------------------------------------------\n");
+    imprimir_estado(stack_a,stack_b);
+    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
+    exit(1);
     prep_for_push(stack_b,cheapiest_node, 'b');
     pb(stack_a,stack_b);
 
@@ -303,22 +322,23 @@ void rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
 void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name)
 {
     t_stack *current = *stack;
-    while(current)
+    while(current != top_node)
     {
-        if (stack_name == 'a')
-        {
-            if (top_node->above_median)
-                ra(stack);
-            else
-                rra(stack);
-        }
-        else if (stack_name == 'b')
-        {
-            if (top_node->above_median)
-                rb(stack);
-            else
-                rrb(stack);
-        }
+		if (stack_name == 'a') //If not, and it is stack `a`, execute the following
+		{
+			if (top_node->above_median)
+				ra(stack);
+			else
+				rra(stack);
+		}
+		else if (stack_name == 'b') //If not, and it is stack `b`, execute the following
+		{
+			if (top_node->above_median)
+            {
+				rb(stack);
+            }else
+				rrb(stack);
+		}
     }
 }
 
@@ -423,4 +443,21 @@ t_stack *find_max(t_stack *stack)
         stack = stack->next;
     }
     return (max_node);
+}
+void min_on_top(t_stack **stack)
+{
+    while((*stack)->data != find_min((*stack))->data)
+    {
+        if (find_min((*stack))->above_median == 1)
+            ra(stack);
+        else
+            rra(stack);
+    }
+    
+}
+
+void move_b_to_a(t_stack **stack_a, t_stack **stack_b)
+{
+    prep_for_push(stack_a,(*stack_b)->target_node,'a');
+    pa(stack_a,stack_b);
 }
