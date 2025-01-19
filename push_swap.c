@@ -154,6 +154,21 @@ void imprimir_estado(t_stack **a, t_stack **b) {
     printf("NULL\n");
 }
 
+void imprimir_node(t_stack *node)
+{
+    if (node)
+    {
+        if (node->target_node)
+        {
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", node->data, node->index,node->push_cost,node->above_median,node->is_cheapiest,node->target_node->data);
+        }else
+        {
+        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", node->data, node->index,node->push_cost,node->above_median,node->is_cheapiest);  
+        }
+
+    }
+}
+
 
 //Manejar los argumentos recibidos por parametro
 

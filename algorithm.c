@@ -137,26 +137,11 @@ void sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
     if (len_a-- > 3)
         pb (stack_a,stack_b);
     //BREAKPOINT AFTER 2 PB-----------------------------------------------------------------------------------------------------------------------//
-    printf("BREAKPOINT AFTER 2 PB-----------------------------------------------------------------------------------------------------------------------\n");
-    imprimir_estado(stack_a,stack_b);
-    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
     while(len_a-- > 3)
     {
         init_nodes_a(stack_a,stack_b);
-        printf("BREAKPOINT AFTER INI NODES A-----------------------------------------------------------------------------------------------------------------------\n");
-        imprimir_estado(stack_a,stack_b);
-        printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
-        // exit(0);
-        move_a_to_b(stack_a,stack_b);
-        printf("BREAKPOINT AFTER MOVE A TO B-----------------------------------------------------------------------------------------------------------------------\n");
-        imprimir_estado(stack_a,stack_b);
-        printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
-        exit(0);
-        
+        move_a_to_b(stack_a,stack_b);        
     }
-    printf("BREAKPOINT AFTER STACK_LEN(STACK_A) == 3-----------------------------------------------------------------------------------------------------------------------\n");
-    imprimir_estado(stack_a,stack_b);
-    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
     sort_three(stack_a);
     while(*stack_b)
     {
@@ -179,22 +164,32 @@ void init_nodes_a(t_stack **stack_a,t_stack **stack_b)
 
 static void current_index(t_stack **stack_a)
 {
-    int i;
+    int i = 0;
     int median;
-    i = 0;
     if (!stack_a)
         return;
     median = stack_len(stack_a) / 2;
     t_stack *node = *stack_a;
-    while(node)
+    if (median == 2)
     {
-        node->index = i;
-        if (i <= median)
+        if(node->index == 0)
             node->above_median = 1;
         else
             node->above_median = 0;
-        node = node->next;
-        i++;
+        return;
+    }
+    else
+    {
+        while(node)
+        {
+            node->index = i;
+            if (i <= median)
+                node->above_median = 1;
+            else
+                node->above_median = 0;
+            node = node->next;
+            i++;
+        }
     }
 }
 
@@ -238,7 +233,7 @@ static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b)
     while(a)
     {
         a->push_cost = a->index;
-        if (!(a->above_median))
+        if (a->above_median == 0)
             a->push_cost = len_a - (a->index);
 
         if (a->target_node->above_median == 1)
@@ -251,6 +246,8 @@ static void cost_analysis_a(t_stack **stack_a,t_stack ** stack_b)
         }
         a = a->next;
     }
+    imprimir_estado(stack_a,stack_b);
+    exit(1);
 }
 
 static void set_cheapest(t_stack **stack)
@@ -279,14 +276,14 @@ static void move_a_to_b(t_stack **stack_a, t_stack **stack_b)
     t_stack *cheapiest_node;
 
     cheapiest_node = get_cheapest(stack_a);
+    imprimir_estado(stack_a,stack_b);
+    imprimir_node(cheapiest_node);
+    exit(1);
     if (cheapiest_node->above_median == 1 && cheapiest_node->target_node->above_median == 1)
         rotate_both(stack_a,stack_b,cheapiest_node);
     else if (cheapiest_node->above_median == 0 && cheapiest_node->target_node->above_median == 0)
         rev_rotate_both(stack_a,stack_b,cheapiest_node);
-    printf("BREAKPOINT INSIDE MOVE A TO B-----------------------------------------------------------------------------------------------------------------------\n");
-    imprimir_estado(stack_a,stack_b);
-    printf("--------------------------------------------------------------------------------------------------------------------------------------------\n");
-    exit(1);
+    prep_for_push(stack_a,cheapiest_node, 'a');
     prep_for_push(stack_b,cheapiest_node, 'b');
     pb(stack_a,stack_b);
 
@@ -326,14 +323,14 @@ void prep_for_push(t_stack **stack,t_stack *top_node,char stack_name)
     {
 		if (stack_name == 'a') //If not, and it is stack `a`, execute the following
 		{
-			if (top_node->above_median)
+			if (top_node->above_median == 1)
 				ra(stack);
 			else
 				rra(stack);
 		}
 		else if (stack_name == 'b') //If not, and it is stack `b`, execute the following
 		{
-			if (top_node->above_median)
+			if (top_node->above_median == 1)
             {
 				rb(stack);
             }else
@@ -360,7 +357,7 @@ t_stack *get_cheapest(t_stack **stack)
     t_stack *node = *stack;
     while(node)
     {
-        if (node->is_cheapiest)
+        if (node->is_cheapiest == 1)
             return (node);
         node = node->next;
     }

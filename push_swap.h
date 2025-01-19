@@ -71,6 +71,7 @@ int					getLowestNode(t_stack **stack);
 void				sortStack(t_stack **stack_a, t_stack **stack_b);
 int getRange(t_stack **stack, int value);
 void free_stack(t_stack *stack);
+void imprimir_node(t_stack *node);
 
 /*------------------------STACK UTILS-------------------*/
 
