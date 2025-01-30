@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/16 14:18:23 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:46:09 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ size_t ft_sizeof(char **array);
 int main(int argc, char *argv[])
 {
 
-    t_stack **stack_a;
-    t_stack **stack_b;
+    t_stack **stack_a,**stack_b;
     char *megaArgv;
     char **valoresArgumentos;
 
@@ -40,61 +39,28 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
         return (-1);
-
     megaArgv = arguments_union(argv);
     valoresArgumentos = ft_split(megaArgv,' ');
-
     stack_a = (t_stack **)malloc(sizeof(t_stack));
     stack_b = (t_stack **)malloc(sizeof(t_stack));
-
     *stack_a = NULL;
     *stack_b = NULL;
-
     if (!check_arguments(valoresArgumentos))
         return(free_all_memory(megaArgv,valoresArgumentos),0);
-
     int size = 0;
     while(valoresArgumentos[size]  != NULL)
         size++;
-
     int *stackValues = (int *)malloc(sizeof(int) * size);
     if (!stackValues)
         return (1);
     int i = 0;
-
     while (i < size)
     {
         stackValues[i] = ft_atoi(valoresArgumentos[i]);
         i++;
     }
-
-    // printf("Array de enteros:\n");
-    // i = 0;
-    // int end = size;
-    // while (end > 0) {
-    //     printf("%d ", stackValues[i]);
-    //     i++;
-    //     end--;
-    // }
-    // printf("\n");
-
-
-
-
-    // ft_printf(1,"Cadena con todos los argumentos = %s\n",megaArgv);
-    // ft_printf(1,"Tamaño de array %d",size);
-
-
-
-
-
     initializeStack(stack_a,stackValues,size);
-
-
     if (stackValues != NULL) {
-
-        // ft_printf(1,"ESTADO INICIAL :\n");
-        // imprimir_estado(stack_a,stack_b);
         if(isSorted(stack_a))
         {
             free_stack(*stack_a);
@@ -103,21 +69,16 @@ int main(int argc, char *argv[])
             free(stack_b);
             return (0);
         }else{
-            sortStack(stack_a,stack_b);
+            sort_stack(stack_a,stack_b);
         }
     } else {
         ft_printf(2,"Error\n");
     }
     free(stackValues);
-
-    // ft_printf(1,"ESTADO FINAL :\n");
-    // imprimir_estado(stack_a,stack_b);
-
     free_stack(*stack_a);
     free_stack(*stack_b);
     free(stack_a);
     free(stack_b);
-
     return(0);
 }
 
@@ -165,7 +126,6 @@ void imprimir_node(t_stack *node)
         {
         printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", node->data, node->index,node->push_cost,node->above_median,node->is_cheapiest);  
         }
-
     }
 }
 

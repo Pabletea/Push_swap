@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/13 13:16:18 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:27:45 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,47 +111,40 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 
 int	rotate(t_stack **stack)
 {
-	t_stack	*top;
 	t_stack	*last;
-
-	if (stack_len(stack) < 2)
-		return (-1);
-	top = *stack;
-	last = getLast(top);
-	*stack = top->next;
-	top->next = NULL;
-	last->next = top;
+	if(!*stack || !stack || !(*stack)->next)
+		return 1;
+	last = getLast(*stack);
+	last->next = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	last->next->prev = last;
+	last->next->next = NULL;
 	return (0);
 }
 
-int	ra(t_stack **stack_a/*,t_stack **stack_b*/)
+int	ra(t_stack **stack_a)
 {
-	if (rotate(stack_a) == -1)
-		return (-1);
-	// ft_putendl_fd("ra", 1);
-	// imprimir_estado(stack_a,stack_b);
+	rotate(stack_a);
 	ft_printf(1,"ra\n");
 	return (0);
 }
 
-int	rb(/*t_stack **stack_a,*/t_stack **stack_b)
+int	rb(t_stack **stack_b)
 {
-	if (rotate(stack_b) == -1)
-		return (-1);
-	// ft_putendl_fd("rb", 1);
-	// imprimir_estado(stack_a,stack_b);
+	ft_printf(1, "RB start-------------------------------------\n");
+	imprimir_estado(stack_b, stack_b);
+	ft_printf(1, "--------------------------------------------------------\n");
+	rotate(stack_b);
 	ft_printf(1,"rb\n");
+	exit(1);
 	return (0);
 }
 
 int	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	if ((stack_len(stack_a) < 2) || (stack_len(stack_b) < 2))
-		return (-1);
 	rotate(stack_a);
 	rotate(stack_b);
-	// ft_putendl_fd("rr", 1);
-	// imprimir_estado(stack_a,stack_b);
 	ft_printf(1,"rr\n");
 	return (0);
 }
