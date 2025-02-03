@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/30 13:27:45 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:25:12 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,8 @@ int	ra(t_stack **stack_a)
 
 int	rb(t_stack **stack_b)
 {
-	ft_printf(1, "RB start-------------------------------------\n");
-	imprimir_estado(stack_b, stack_b);
-	ft_printf(1, "--------------------------------------------------------\n");
 	rotate(stack_b);
 	ft_printf(1,"rb\n");
-	exit(1);
 	return (0);
 }
 

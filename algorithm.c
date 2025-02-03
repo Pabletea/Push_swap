@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/30 13:19:48 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:56:53 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ void	sortAlgorithm(t_stack **stack_a, t_stack **stack_b)
 	{
 		init_nodes_a(stack_a, stack_b);
 		move_a_to_b(stack_a, stack_b);
-        exit(1);
 	}
 	sort_three(stack_a);
 	while (*stack_b)
@@ -281,7 +280,9 @@ static void	move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 	cheapiest_node = get_cheapest(stack_a);
     ft_printf(1, "Cheapiest node-------------------------------------\n");
 	imprimir_node(cheapiest_node);
+	imprimir_node(cheapiest_node->target_node);
     ft_printf(1, "--------------------------------------------------------\n");
+	exit(1);
     if (cheapiest_node->above_median == 1 && cheapiest_node->target_node->above_median == 1)
         rotate_both(stack_a, stack_b, cheapiest_node);
 	else if (cheapiest_node->above_median == 0 && cheapiest_node->target_node->above_median == 0)
@@ -312,9 +313,6 @@ t_stack	*get_cheapiest(t_stack **stack)
 
 void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
 {
-    ft_printf(1, "RB start-------------------------------------\n");
-	imprimir_estado(stack_a, stack_b);
-    ft_printf(1, "--------------------------------------------------------\n");
 	t_stack	*current_a;
 	t_stack	*current_b;
 
@@ -325,10 +323,6 @@ void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
 		rr(stack_a, stack_b);
 	current_index(stack_a);
 	current_index(stack_b);
-    ft_printf(1, "MAB start-------------------------------------\n");
-	imprimir_estado(stack_a, stack_b);
-    ft_printf(1, "--------------------------------------------------------\n");
-    exit(1);
 }
 
 void	prep_for_push(t_stack **stack, t_stack *top_node, char stack_name)
