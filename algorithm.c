@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/03 16:04:11 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:40:21 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,14 +290,13 @@ static void	move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 	printf("Ended rotations-----------------------------------------------");
 	imprimir_estado(stack_a,stack_b);
 	printf("----------------------------------------------");
-	exit(1);
 	prep_for_push(stack_a, cheapiest_node, 'a');
-	prep_for_push(stack_b, cheapiest_node, 'b');
+	prep_for_push(stack_b, cheapiest_node->target_node, 'b');
 	pb(stack_a, stack_b);
     ft_printf(1, "MAB end-------------------------------------\n");
 	imprimir_estado(stack_a, stack_b);
     ft_printf(1, "--------------------------------------------------------\n");
-	exit(1);
+
 }
 
 t_stack	*get_cheapiest(t_stack **stack)
@@ -325,30 +324,23 @@ void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapiest_node)
     current_index(stack_b);
 }
 
-void	prep_for_push(t_stack **stack, t_stack *top_node, char stack_name)
-{
-	t_stack	*current;
+void prep_for_push(t_stack **stack, t_stack *top_node, char stack_name) {
+    if (!stack || !*stack || !top_node) return;
 
-	current = *stack;
-	while (current != top_node)
-	{
-		if (stack_name == 'a') // If not, and it is stack `a`,execute the following
-			{
-				if (top_node->above_median == 1)
-					ra(stack);
-				else
-					rra(stack);
-			}
-		else if (stack_name == 'b') // If not, and it is stack `b`,execute the following
-			{
-				if (top_node->above_median == 1)
-				{
-					rb(stack);
-				}
-				else
-					rrb(stack);
-			}
-	}
+    while (*stack != top_node) {
+        if (stack_name == 'a') {
+            if (top_node->above_median)
+                ra(stack);
+            else
+                rra(stack);
+        }
+        else if (stack_name == 'b') {
+            if (top_node->above_median)
+                rb(stack);
+            else
+                rrb(stack);
+        }
+    }
 }
 
 void	init_nodes_b(t_stack **stack_a, t_stack **stack_b, t_stack *a,

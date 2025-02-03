@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:35:19 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/03 15:25:12 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:25:58 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,23 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
-int	rotate(t_stack **stack)
+int rotate(t_stack **stack)
 {
-	t_stack	*last;
-	if(!*stack || !stack || !(*stack)->next)
-		return 1;
-	last = getLast(*stack);
-	last->next = *stack;
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	last->next->prev = last;
-	last->next->next = NULL;
-	return (0);
+    t_stack *top;
+
+    if (!stack || !*stack || !(*stack)->next)
+        return (1); // Error: Empty or single-node stack
+
+    top = *stack;
+    *stack = top->next; // New top
+    (*stack)->prev = NULL;
+
+    t_stack *last = getLast(*stack);
+    last->next = top; // Move old top to the end
+    top->prev = last;
+    top->next = NULL;
+
+    return (0);
 }
 
 int	ra(t_stack **stack_a)
@@ -145,27 +150,21 @@ int	rr(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
-int	reverseRotate(t_stack **stack)
+int reverseRotate(t_stack **stack)
 {
-	t_stack	*top;
-	t_stack	*last;
+    t_stack *last;
 
-	if (stack_len(stack) < 2)
-		return (-1);
-	top = *stack;
-	last = getLast(top);
-	while (top)
-	{
-		if (top->next->next == NULL)
-		{
-			top->next = NULL;
-			break ;
-		}
-		top = top->next;
-	}
-	last->next = *stack;
-	*stack = last;
-	return (0);
+    if (!stack || !*stack || !(*stack)->next)
+        return (-1); // Error
+
+    last = getLast(*stack);
+    last->prev->next = NULL; // Second-to-last node becomes new last
+    last->next = *stack; // Move last to top
+    last->prev = NULL;
+    (*stack)->prev = last;
+    *stack = last;
+
+    return (0);
 }
 
 int	rra(t_stack **stack_a/*,t_stack **stack_b*/)
