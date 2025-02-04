@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 21:50:18 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:00:53 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ void				rotate_both(t_stack **a, t_stack **b,
 
 void				rev_rotate_both(t_stack **a, t_stack **b,
 						t_stack *cheapest_node);
+char				*arguments_union(char **argv);
+int					is_valid_number(char *str);
 
 #endif

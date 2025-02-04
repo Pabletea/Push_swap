@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:04:48 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 22:43:11 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:44:28 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	while (*b)
 	{
 		init_nodes_b(*a, *b);
-		move_b_to_a(a, b);zº
+		move_b_to_a(a, b);
 	}
 	current_index(*a);
 	min_on_top(a);

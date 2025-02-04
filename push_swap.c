@@ -6,202 +6,152 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 22:01:34 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:16:12 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int *validate_input(int argc, char *argv[], int *stackValues);
-void imprimir_estado(t_stack **a, t_stack **b);
-void getValues(int ar, char *av[]);
-char	*arguments_union(char **argv);
+int			*validate_input(int argc, char *argv[], int *stack_values);
+void		getValues(int ar, char *av[]);
 static void	free_all_memory(char *argv_union, char **arr_arguments);
 static int	check_arguments(char **argv);
-void convert_strings_to_integers(const char *strArray[], int intArray[], int size);
-int	is_valid_number(char *str);
-int	is_valid_integer_value(char *str);
-long	ft_atol(const char *nptr);
-size_t ft_sizeof(char **array);
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
+	char	*mega_argv;
+	char	**valores_argumentos;
+	int		size;
+	int		*stack_values;
+	int		i;
+	t_stack	**stack_a;
+	t_stack	**stack_b;
 
-    t_stack **stack_a,**stack_b;
-    char *megaArgv;
-    char **valoresArgumentos;
-
-
-    megaArgv = NULL;
-    valoresArgumentos = NULL;
-
-
-    if (argc < 2)
-        return (-1);
-    megaArgv = arguments_union(argv);
-    valoresArgumentos = ft_split(megaArgv,' ');
-    stack_a = (t_stack **)malloc(sizeof(t_stack));
-    stack_b = (t_stack **)malloc(sizeof(t_stack));
-    *stack_a = NULL;
-    *stack_b = NULL;
-    if (!check_arguments(valoresArgumentos))
-        return(free_all_memory(megaArgv,valoresArgumentos),0);
-    int size = 0;
-    while(valoresArgumentos[size]  != NULL)
-        size++;
-    int *stackValues = (int *)malloc(sizeof(int) * size);
-    if (!stackValues)
-        return (1);
-    int i = 0;
-    while (i < size)
-    {
-        stackValues[i] = ft_atoi(valoresArgumentos[i]);
-        i++;
-    }
-    initializeStack(stack_a,stackValues,size);
-    if (stackValues != NULL) {
-        if(isSorted(*stack_a))
-        {
-            free_stack(*stack_a);
-            free_stack(*stack_b);
-            free(stack_a);
-            free(stack_b);
-            return (0);
-        }else{
-            sort_stack(stack_a,stack_b);
-        }
-    } else {
-        ft_printf(2,"Error\n");
-    }
-    free(stackValues);
-    free_stack(*stack_a);
-    free_stack(*stack_b);
-    free(stack_a);
-    free(stack_b);
-    return(0);
+	mega_argv = NULL;
+	valores_argumentos = NULL;
+	if (argc < 2)
+		return (-1);
+	mega_argv = arguments_union(argv);
+	valores_argumentos = ft_split(mega_argv, ' ');
+	stack_a = (t_stack **)malloc(sizeof(t_stack));
+	stack_b = (t_stack **)malloc(sizeof(t_stack));
+	*stack_a = NULL;
+	*stack_b = NULL;
+	if (!check_arguments(valores_argumentos))
+		return (free_all_memory(mega_argv, valores_argumentos), 0);
+	size = 0;
+	while (valores_argumentos[size] != NULL)
+		size++;
+	stack_values = (int *)malloc(sizeof(int) * size);
+	if (!stack_values)
+		return (1);
+	i = 0;
+	while (i < size)
+	{
+		stack_values[i] = ft_atoi(valores_argumentos[i]);
+		i++;
+	}
+	initializeStack(stack_a, stack_values, size);
+	if (stack_values != NULL)
+	{
+		if (isSorted(*stack_a))
+		{
+			free_stack(*stack_a);
+			free_stack(*stack_b);
+			free(stack_a);
+			free(stack_b);
+			return (0);
+		}
+		else
+		{
+			sort_stack(stack_a, stack_b);
+		}
+	}
+	else
+	{
+		ft_printf(2, "Error\n");
+	}
+	free(stack_values);
+	free_stack(*stack_a);
+	free_stack(*stack_b);
+	free(stack_a);
+	free(stack_b);
+	return (0);
 }
 
-
-void imprimir_estado(t_stack **a, t_stack **b) {
-    t_stack *current = *a;
-    printf("Stack A:\n");
-    while (current)
-    {
-        if (current->target_node)
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", current->data, current->index,current->push_cost,current->above_median,current->is_cheapiest,current->target_node->data);
-        }else
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", current->data, current->index,current->push_cost,current->above_median,current->is_cheapiest);  
-        }
-        current = current->next;
-
-    }
-    printf("NULL\n");
-    t_stack *current_b = *b;
-    printf("Stack B:\n");
-    while (current_b)
-    {
-        if (current_b->target_node)
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest,current_b->target_node->data);
-        }else
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", current_b->data, current_b->index,current_b->push_cost,current_b->above_median,current_b->is_cheapiest);  
-        }
-        current_b = current_b->next;
-    }
-    printf("NULL\n");
-}
-
-void imprimir_node(t_stack *node)
+int	*validate_input(int argc, char *argv[], int *stack_values)
 {
-    if (node)
-    {
-        if (node->target_node)
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d | TARGET NODE VALUE (%d) |\n", node->data, node->index,node->push_cost,node->above_median,node->is_cheapiest,node->target_node->data);
-        }else
-        {
-        printf("| Data: %d | Index: %d | Push_cost :%d | Above_media: %d| Is_cheapest: %d|\n", node->data, node->index,node->push_cost,node->above_median,node->is_cheapiest);  
-        }
-    }
-}
+	int		i;
+	int		j;
+	int		z;
+	int		string_check;
+	int		*seen_numbers;
+	int		seen_count;
+	long	number;
 
-
-
-int *validate_input(int argc, char *argv[], int *stackValues)
-{
-    int i;
-    int j;
-    int z;
-    int string_check;
-    int *seen_numbers;
-    int seen_count = 0;
-    long number;
-    if (argc <= 2)
-        return (NULL);
-    seen_numbers = (int *)calloc((argc - 1), sizeof(int));
-    if (!seen_numbers)
-        return (NULL);
-    i = 1;
-    while (i < argc)
-    {
-        j = 0;
-        string_check = 1;
-        while (argv[i][j])
-        {
-            if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0 )
-            {
-                j++;
-                if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-                {
-                    string_check = 0;
-                    break;
-                }
-            }
-            else if (argv[i][j] >= '0' && argv[i][j] <= '9')
-                j++;
-            else
-            {
-                string_check = 0;
-                break;
-            }
-        }
-
-        if (string_check == 0)
-        {
-            free(seen_numbers);
-            return (NULL);
-        }
-        number = ft_atoi(argv[i]);
-        if (number > 2147483647 || number < -2147483647)
-        {
-            free(seen_numbers);
-            return (NULL);
-        }
-        z = 0;
-        while (z < seen_count)
-        {
-            if (seen_numbers[z] == number)
-            {
-                free(seen_numbers);
-                return (NULL);
-            }
-            z++;
-        }
-        seen_numbers[seen_count] = (int)number;
-        stackValues[i - 1] = (int)number;
-        seen_count++;
-        i++;
-    }
-    free(seen_numbers);
-    return (stackValues);
+	seen_count = 0;
+	if (argc <= 2)
+		return (NULL);
+	seen_numbers = (int *)calloc((argc - 1), sizeof(int));
+	if (!seen_numbers)
+		return (NULL);
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		string_check = 1;
+		while (argv[i][j])
+		{
+			if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0)
+			{
+				j++;
+				if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
+				{
+					string_check = 0;
+					break ;
+				}
+			}
+			else if (argv[i][j] >= '0' && argv[i][j] <= '9')
+				j++;
+			else
+			{
+				string_check = 0;
+				break ;
+			}
+		}
+		if (string_check == 0)
+		{
+			free(seen_numbers);
+			return (NULL);
+		}
+		number = ft_atoi(argv[i]);
+		if (number > 2147483647 || number < -2147483647)
+		{
+			free(seen_numbers);
+			return (NULL);
+		}
+		z = 0;
+		while (z < seen_count)
+		{
+			if (seen_numbers[z] == number)
+			{
+				free(seen_numbers);
+				return (NULL);
+			}
+			z++;
+		}
+		seen_numbers[seen_count] = (int)number;
+		stack_values[i - 1] = (int)number;
+		seen_count++;
+		i++;
+	}
+	free(seen_numbers);
+	return (stack_values);
 }
 
 static int	check_arguments(char **argv)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!argv[i])
@@ -233,101 +183,9 @@ static void	free_all_memory(char *argv_union, char **arr_arguments)
 			temp++;
 		}
 	}
-	free (arr_arguments);
+	free(arr_arguments);
 }
 
-
-char	*arguments_union(char **argv)
-{
-	int		i;
-	char	*union_str;
-	char	*temp_str;
-
-	i = 1;
-	union_str = ft_calloc(1, 1);
-	if (!union_str)
-		return (NULL);
-	union_str[0] = '\0';
-	while (argv[i])
-	{
-		temp_str = ft_strjoin(union_str, " ");
-		if (!temp_str)
-			return (free(union_str), NULL);
-		free(union_str);
-		union_str = temp_str;
-		temp_str = ft_strjoin(union_str, argv[i]);
-		if (!temp_str)
-			return (free(union_str), NULL);
-		free(union_str);
-		union_str = temp_str;
-		i++;
-	}
-	return (union_str);
-}
-
-int	is_valid_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL || strlen(str) == 0)
-		return (0);
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	if (!ft_isdigit(str[i]))
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (is_valid_integer_value(str));
-}
-
-
-int	is_valid_integer_value(char *str)
-{
-	long	num;
-	long	check_num;
-
-	num = ft_atoi(str);
-	check_num = ft_atol(str);
-	if (num < INT_MIN || num > INT_MAX)
-		return (0);
-	else if (num != check_num)
-		return (0);
-	return (1);
-}
-long	ft_atol(const char *nptr)
-{
-	int			i;
-	int			s;
-	long		n;
-
-	i = 0;
-	n = 0;
-	s = 1;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			s = -1;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		n = n * 10 + (nptr[i] - 48);
-		i++;
-	}
-	return (n * s);
-}
-
-void convert_strings_to_integers(const char *strArray[], int intArray[], int size) {
-    int i = 0;
-    while (i < size) {
-        intArray[i] = atoi(strArray[i]);
-        i++;
-    }
-}
+// 		}
+// 	}
+// }

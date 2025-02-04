@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:58 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 21:45:50 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:26:08 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ int	stack_len(t_stack *stack)
 	return (count);
 }
 
-void	initializeStack(t_stack **stack, int *stackValues, int nValues)
+void	initializeStack(t_stack **stack, int *stack_values, int nValues)
 {
 	t_stack	*new_node;
 	t_stack	*current;
 	int		i;
 
-	if (!stack || !stackValues || nValues <= 0)
+	if (!stack || !stack_values || nValues <= 0)
 		return ;
 	current = NULL;
 	i = 0;
 	while (i < nValues)
 	{
-		new_node = create_node(stackValues[i], i);
+		new_node = create_node(stack_values[i], i);
 		if (!new_node)
 			return ;
 		if (*stack == NULL)
