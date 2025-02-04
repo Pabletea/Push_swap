@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/30 12:46:09 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:51:23 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     }
     initializeStack(stack_a,stackValues,size);
     if (stackValues != NULL) {
-        if(isSorted(stack_a))
+        if(isSorted(*stack_a))
         {
             free_stack(*stack_a);
             free_stack(*stack_b);

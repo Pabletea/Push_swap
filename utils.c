@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/04 14:00:58 by pabalons          #+#    #+#             */
+/*   Updated: 2025/02/04 14:00:59 by pabalons         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*create_node(int data, int index);
 
-int	stack_len(t_stack **stack)
+int	stack_len(t_stack *stack) //Define a function that calculates and returns the length of a stack
 {
-	int		count;
-	t_stack	*current;
+	int	count; //To store the node count
 
+	if (!stack) 
+		return (0);
 	count = 0;
-	current = *stack;
-	while (current != NULL)
+	while (stack) //Loop until the end of the stack is reached
 	{
+		stack = stack->next; //Move to the next node
 		count++;
-		current = current->next;
 	}
 	return (count);
 }
@@ -41,16 +53,15 @@ void	initializeStack(t_stack **stack, int *stackValues, int nValues)
 	}
 }
 
-int	isSorted(t_stack **stack)
+int	isSorted(t_stack *stack)
 {
-	t_stack	*current;
-
-	current = *stack;
-	while (current && current->next)
+	if (!stack)
+		return (1);
+	while (stack->next) //Loop until the end of the stack is reached
 	{
-		if (current->data > current->next->data)
+		if (stack->data > stack->next->data) //Check if the current value is larger than the next node's value, indicating it is out of sort
 			return (0);
-		current = current->next;
+		stack = stack->next; //If not, move to the next node for processing
 	}
 	return (1);
 }
