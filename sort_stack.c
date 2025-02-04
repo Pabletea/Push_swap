@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:04:48 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 16:48:12 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 21:49:55 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-static void	move_a_to_b(t_stack **a, t_stack **b) //Define a function that prepares the cheapest nodes on top of the stacks for pushing `a` nodes to stack `b`, until there are three nodes left in `a`
+static void	move_a_to_b(t_stack **a, t_stack **b) 
 {
 	t_stack	*cheapest_node;
 
@@ -71,8 +71,8 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	}
 	while (*b)
 	{
-		init_nodes_b(*a, *b); //Initiate all nodes from both stacks
-		move_b_to_a(a, b); //Move all `b` nodes back to a sorted stack `a`
+		init_nodes_b(*a, *b);
+		move_b_to_a(a, b); 
 	}
 	current_index(*a);
 	min_on_top(a);

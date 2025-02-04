@@ -6,14 +6,13 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 14:51:23 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:01:34 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int *validate_input(int argc, char *argv[], int *stackValues);
-// void imprimir_pila(t_stack *stack, const char *nombre);
 void imprimir_estado(t_stack **a, t_stack **b);
 void getValues(int ar, char *av[]);
 char	*arguments_union(char **argv);
@@ -84,7 +83,7 @@ int main(int argc, char *argv[])
 
 
 void imprimir_estado(t_stack **a, t_stack **b) {
-    t_stack *current = *a;  // Desreferenciamos el puntero doble para obtener el stack
+    t_stack *current = *a;
     printf("Stack A:\n");
     while (current)
     {
@@ -99,7 +98,7 @@ void imprimir_estado(t_stack **a, t_stack **b) {
 
     }
     printf("NULL\n");
-    t_stack *current_b = *b;  // Desreferenciamos el puntero doble para obtener el stack
+    t_stack *current_b = *b;
     printf("Stack B:\n");
     while (current_b)
     {
@@ -130,7 +129,6 @@ void imprimir_node(t_stack *node)
 }
 
 
-//Manejar los argumentos recibidos por parametro
 
 int *validate_input(int argc, char *argv[], int *stackValues)
 {
@@ -143,8 +141,6 @@ int *validate_input(int argc, char *argv[], int *stackValues)
     long number;
     if (argc <= 2)
         return (NULL);
-
-    // Reservar memoria inicializada para evitar valores basura
     seen_numbers = (int *)calloc((argc - 1), sizeof(int));
     if (!seen_numbers)
         return (NULL);
@@ -153,7 +149,6 @@ int *validate_input(int argc, char *argv[], int *stackValues)
     {
         j = 0;
         string_check = 1;
-        // Validar que el argumento sea un número
         while (argv[i][j])
         {
             if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0 )
@@ -174,19 +169,17 @@ int *validate_input(int argc, char *argv[], int *stackValues)
             }
         }
 
-        if (string_check == 0) // Argumento inválido
+        if (string_check == 0)
         {
             free(seen_numbers);
             return (NULL);
         }
-        // Convertir el argumento a entero
         number = ft_atoi(argv[i]);
         if (number > 2147483647 || number < -2147483647)
         {
             free(seen_numbers);
             return (NULL);
         }
-        // Verificar si el número ya fue visto
         z = 0;
         while (z < seen_count)
         {
@@ -197,13 +190,12 @@ int *validate_input(int argc, char *argv[], int *stackValues)
             }
             z++;
         }
-        // Agregar número al array de números vistos y stackValues
         seen_numbers[seen_count] = (int)number;
         stackValues[i - 1] = (int)number;
         seen_count++;
         i++;
     }
-    free(seen_numbers); // Liberar memoria de números vistos
+    free(seen_numbers);
     return (stackValues);
 }
 
@@ -331,13 +323,6 @@ long	ft_atol(const char *nptr)
 	}
 	return (n * s);
 }
-// size_t ft_sizeof(char **array) {
-//     size_t size = 0;
-//     while (array[size] != '\0') {
-//         size++;
-//     }
-//     return size * sizeof(int); // Multiplica por el tamaño de cada elemento (int)
-// }
 
 void convert_strings_to_integers(const char *strArray[], int intArray[], int size) {
     int i = 0;

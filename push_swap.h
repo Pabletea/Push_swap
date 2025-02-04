@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 17:29:43 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 21:50:18 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-/*------------------------DEFINICIONES------------------------*/
+
 typedef struct s_list
 {
 	int				data;
@@ -31,7 +31,7 @@ typedef struct s_list
 	struct s_list	*target_node;
 	struct s_list	*prev;
 }					t_stack;
-/*------------------------INSTRUCTIONS------------------------*/
+
 
 void	sa(t_stack	**a);
 void	sb(t_stack **b);
@@ -54,7 +54,6 @@ void	rrb(t_stack **b);
 
 void	rrr(t_stack **a, t_stack **b);
 
-/*------------------------UTILS------------------------*/
 
 int	stack_len(t_stack *stack) ;
 void				initializeStack(t_stack **stack, int *stackValues,
@@ -69,21 +68,21 @@ void				free_stack(t_stack *stack);
 void				imprimir_node(t_stack *node);
 t_stack	*find_min(t_stack *stack);
 
-/*------------------------STACK UTILS-------------------*/
+
 void	current_index(t_stack *stack);
 t_stack	*get_cheapest(t_stack *stack);
 void	prep_for_push(t_stack **stack,t_stack *top_node,char stack_name);
 t_stack	*find_max(t_stack *stack);
 
-/*------------------------INIT NODES-------------------*/
+
 void	init_nodes_a(t_stack *a, t_stack *b);
 void	init_nodes_b(t_stack *a, t_stack *b);
 
-/*------------------------LIST UTILS--------------------*/
+
 t_stack	*find_last(t_stack *stack);
 t_stack	*ft_lstlast(t_stack *head);
 
-/*------------------------ALGORITHM-------------------*/
+
 
 void	sort_three(t_stack **a);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);

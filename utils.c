@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:58 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 17:24:55 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 21:45:50 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 t_stack	*create_node(int data, int index);
 
-int	stack_len(t_stack *stack) //Define a function that calculates and returns the length of a stack
+int	stack_len(t_stack *stack)
 {
-	int	count; //To store the node count
+	int	count;
 
 	if (!stack) 
 		return (0);
 	count = 0;
-	while (stack) //Loop until the end of the stack is reached
+	while (stack)
 	{
-		stack = stack->next; //Move to the next node
+		stack = stack->next;
 		count++;
 	}
 	return (count);
@@ -57,11 +57,11 @@ int	isSorted(t_stack *stack)
 {
 	if (!stack)
 		return (1);
-	while (stack->next) //Loop until the end of the stack is reached
+	while (stack->next)
 	{
-		if (stack->data > stack->next->data) //Check if the current value is larger than the next node's value, indicating it is out of sort
+		if (stack->data > stack->next->data)
 			return (0);
-		stack = stack->next; //If not, move to the next node for processing
+		stack = stack->next;
 	}
 	return (1);
 }
@@ -112,10 +112,7 @@ int	getRange(t_stack **stack, int value)
 	int		range;
 
 	if (*stack == NULL)
-	{
-		// Handle empty stack case
-		return (-1); // Or any appropriate value to indicate error
-	}
+		return (-1);
 	current = *stack;
 	range = 0;
 	while (current != NULL)
@@ -127,8 +124,7 @@ int	getRange(t_stack **stack, int value)
 		range++;
 		current = current->next;
 	}
-	// If the loop completes without finding the value
-	return (-1); // Or any appropriate value to indicate value not found
+	return (-1);
 }
 
 void free_stack(t_stack *stack)
@@ -137,7 +133,6 @@ void free_stack(t_stack *stack)
     while (stack)
     {
         temp = stack->next;
-        // If there are any additional allocated members, free them here.
         free(stack);
         stack = temp;
     }
