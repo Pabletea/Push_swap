@@ -18,7 +18,7 @@ int	stack_len(t_stack *stack)
 {
 	int	count;
 
-	if (!stack) 
+	if (!stack)
 		return (0);
 	count = 0;
 	while (stack)
@@ -127,15 +127,16 @@ int	getRange(t_stack **stack, int value)
 	return (-1);
 }
 
-void free_stack(t_stack *stack)
+void	free_stack(t_stack *stack)
 {
-    t_stack *temp;
-    while (stack)
-    {
-        temp = stack->next;
-        free(stack);
-        stack = temp;
-    }
+	t_stack	*temp;
+
+	while (stack)
+	{
+		temp = stack->next;
+		free(stack);
+		stack = temp;
+	}
 }
 
 t_stack	*create_node(int data, int index)

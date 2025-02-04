@@ -6,23 +6,20 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:04:48 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 21:49:55 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:43:11 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-
-static void	move_a_to_b(t_stack **a, t_stack **b) 
+static void	move_a_to_b(t_stack **a, t_stack **b)
 {
 	t_stack	*cheapest_node;
 
-	cheapest_node = get_cheapest(*a); 
-	if (cheapest_node->above_median 
-		&& cheapest_node->target_node->above_median)
+	cheapest_node = get_cheapest(*a);
+	if (cheapest_node->above_median && cheapest_node->target_node->above_median)
 		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median) 
+	else if (!(cheapest_node->above_median)
 		&& !(cheapest_node->target_node->above_median))
 		rev_rotate_both(a, b, cheapest_node);
 	prep_for_push(a, cheapest_node, 'a');
@@ -33,7 +30,7 @@ static void	move_a_to_b(t_stack **a, t_stack **b)
 static void	move_b_to_a(t_stack **a, t_stack **b)
 {
 	prep_for_push(a, (*b)->target_node, 'a');
-	pa(a, b); 
+	pa(a, b);
 }
 
 static void	min_on_top(t_stack **a)
@@ -49,8 +46,8 @@ static void	min_on_top(t_stack **a)
 
 void	sort_stacks(t_stack **a, t_stack **b)
 {
-    
 	int	len_a;
+	int	remaining;
 
 	len_a = stack_len(*a);
 	if (len_a-- > 3 && !isSorted(*a))
@@ -62,17 +59,15 @@ void	sort_stacks(t_stack **a, t_stack **b)
 		init_nodes_a(*a, *b);
 		move_a_to_b(a, b);
 	}
-    int remaining = stack_len(*a);
-    if (remaining == 3)
-        sort_three(a);
-    else if (remaining == 2 && (*a)->data > (*a)->next->data)
-    {	
+	remaining = stack_len(*a);
+	if (remaining == 3)
+		sort_three(a);
+	else if (remaining == 2 && (*a)->data > (*a)->next->data)
 		sa(a);
-	}
 	while (*b)
 	{
 		init_nodes_b(*a, *b);
-		move_b_to_a(a, b); 
+		move_b_to_a(a, b);zº
 	}
 	current_index(*a);
 	min_on_top(a);

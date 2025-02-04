@@ -46,4 +46,3 @@ t_stack	*ft_lstlast(t_stack *head)
 	}
 	return (tmp);
 }
-

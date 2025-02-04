@@ -18,70 +18,70 @@ static void	rotate(t_stack **stack)
 
 	if (!*stack || !(*stack)->next)
 		return ;
-	last_node = find_last(*stack); 
+	last_node = find_last(*stack);
 	last_node->next = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	last_node->next->prev = last_node;
 	last_node->next->next = NULL;
-}		
+}
 
 void	ra(t_stack **a)
 {
 	rotate(a);
-	ft_printf(1,"ra\n");
+	ft_printf(1, "ra\n");
 }
 
 void	rb(t_stack **b)
 {
 	rotate(b);
-	ft_printf(1,"rb\n");
+	ft_printf(1, "rb\n");
 }
 
 void	rr(t_stack **a, t_stack **b)
 {
 	rotate(a);
 	rotate(b);
-	ft_printf(1,"rr\n");
+	ft_printf(1, "rr\n");
 }
 
-static void swap(t_stack **head)
+static void	swap(t_stack **head)
 {
-    t_stack *first;
-    t_stack *second;
-    t_stack *third;
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*third;
 
-    if (!head || !*head || !(*head)->next)
-        return;
-    first = *head;
-    second = first->next;
-    third = second->next;
-    second->prev = NULL;
-    second->next = first;
-    first->prev = second;
-    first->next = third;
-    if (third)
-        third->prev = first;
-    *head = second;
+	if (!head || !*head || !(*head)->next)
+		return ;
+	first = *head;
+	second = first->next;
+	third = second->next;
+	second->prev = NULL;
+	second->next = first;
+	first->prev = second;
+	first->next = third;
+	if (third)
+		third->prev = first;
+	*head = second;
 }
 
-void	sa(t_stack	**a)
+void	sa(t_stack **a)
 {
 	swap(a);
-	ft_printf(1,"sa\n");
+	ft_printf(1, "sa\n");
 }
 
 void	sb(t_stack **b)
 {
 	swap(b);
-	ft_printf(1,"sb\n");
+	ft_printf(1, "sb\n");
 }
 
 void	ss(t_stack **a, t_stack **b)
 {
 	swap(a);
 	swap(b);
-	ft_printf(1,"ss\n");
+	ft_printf(1, "ss\n");
 }
 static void	push(t_stack **dst, t_stack **src)
 {
@@ -109,17 +109,17 @@ static void	push(t_stack **dst, t_stack **src)
 
 void	pa(t_stack **a, t_stack **b)
 {
-	push(a, b); 
-	ft_printf(1,"pa\n");
+	push(a, b);
+	ft_printf(1, "pa\n");
 }
 
 void	pb(t_stack **b, t_stack **a)
 {
 	push(b, a);
-	ft_printf(1,"pb\n");
+	ft_printf(1, "pb\n");
 }
 
-static void rev_rotate(t_stack **stack)
+static void	rev_rotate(t_stack **stack)
 {
 	t_stack	*head;
 	t_stack	*tail;
@@ -132,8 +132,8 @@ static void rev_rotate(t_stack **stack)
 	{
 		if (head->next->next == NULL)
 		{
-			 head->next = NULL;
-			 break ;
+			head->next = NULL;
+			break ;
 		}
 		head = head->next;
 	}
@@ -141,37 +141,35 @@ static void rev_rotate(t_stack **stack)
 	*stack = tail;
 }
 
-void rra(t_stack **a)
+void	rra(t_stack **a)
 {
-    rev_rotate(a);
-	ft_printf(1,"rra\n");
+	rev_rotate(a);
+	ft_printf(1, "rra\n");
 }
 void	rrb(t_stack **b)
 {
 	rev_rotate(b);
-	ft_printf(1,"rrb\n");
+	ft_printf(1, "rrb\n");
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
 	rev_rotate(a);
 	rev_rotate(b);
-	ft_printf(1,"rrr\n");
+	ft_printf(1, "rrr\n");
 }
 
-void	rotate_both(t_stack **a,t_stack **b,t_stack *cheapest_node)
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-	while (*b != cheapest_node->target_node
-		&& *a != cheapest_node)
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rr(a, b);
 	current_index(*a);
 	current_index(*b);
 }
 
-void	rev_rotate_both(t_stack **a,t_stack **b,t_stack *cheapest_node)
+void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-	while (*b != cheapest_node->target_node
-		&& *a != cheapest_node)
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rrr(a, b);
 	current_index(*a);
 	current_index(*b);

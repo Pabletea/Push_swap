@@ -32,71 +32,58 @@ typedef struct s_list
 	struct s_list	*prev;
 }					t_stack;
 
+void				sa(t_stack **a);
+void				sb(t_stack **b);
+void				ss(t_stack **a, t_stack **b);
 
-void	sa(t_stack	**a);
-void	sb(t_stack **b);
-void	ss(t_stack **a, t_stack **b);
+void				pa(t_stack **a, t_stack **b);
 
+void				pb(t_stack **b, t_stack **a);
 
-void	pa(t_stack **a, t_stack **b);
+void				ra(t_stack **a);
+void				rb(t_stack **b);
+void				rr(t_stack **a, t_stack **b);
 
-void	pb(t_stack **b, t_stack **a) ;
+void				rra(t_stack **a);
 
+void				rrb(t_stack **b);
 
-void	ra(t_stack **a);
-void	rb(t_stack **b);
-void	rr(t_stack **a, t_stack **b);
+void				rrr(t_stack **a, t_stack **b);
 
-
-void	rra(t_stack **a);
-
-void	rrb(t_stack **b);
-
-void	rrr(t_stack **a, t_stack **b);
-
-
-int	stack_len(t_stack *stack) ;
+int					stack_len(t_stack *stack);
 void				initializeStack(t_stack **stack, int *stackValues,
 						int nValues);
 void				imprimir_estado(t_stack **a, t_stack **b);
-int	isSorted(t_stack *stack);
+int					isSorted(t_stack *stack);
 int					getHighestNode(t_stack **stack);
 int					getLowestNode(t_stack **stack);
 void				sort_stack(t_stack **stack_a, t_stack **stack_b);
 int					getRange(t_stack **stack, int value);
 void				free_stack(t_stack *stack);
 void				imprimir_node(t_stack *node);
-t_stack	*find_min(t_stack *stack);
+t_stack				*find_min(t_stack *stack);
 
+void				current_index(t_stack *stack);
+t_stack				*get_cheapest(t_stack *stack);
+void				prep_for_push(t_stack **stack, t_stack *top_node,
+						char stack_name);
+t_stack				*find_max(t_stack *stack);
 
-void	current_index(t_stack *stack);
-t_stack	*get_cheapest(t_stack *stack);
-void	prep_for_push(t_stack **stack,t_stack *top_node,char stack_name);
-t_stack	*find_max(t_stack *stack);
+void				init_nodes_a(t_stack *a, t_stack *b);
+void				init_nodes_b(t_stack *a, t_stack *b);
 
+t_stack				*find_last(t_stack *stack);
+t_stack				*ft_lstlast(t_stack *head);
 
-void	init_nodes_a(t_stack *a, t_stack *b);
-void	init_nodes_b(t_stack *a, t_stack *b);
-
-
-t_stack	*find_last(t_stack *stack);
-t_stack	*ft_lstlast(t_stack *head);
-
-
-
-void	sort_three(t_stack **a);
+void				sort_three(t_stack **a);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
 void				sort_five(t_stack **stack_a, t_stack **stack_b);
-void	sort_stacks(t_stack **a, t_stack **b);
+void				sort_stacks(t_stack **a, t_stack **b);
 
-
-void	rotate_both(t_stack **a,
-						t_stack **b,
+void				rotate_both(t_stack **a, t_stack **b,
 						t_stack *cheapest_node);
 
-
-void	rev_rotate_both(t_stack **a,
-								t_stack **b,
-								t_stack *cheapest_node);
+void				rev_rotate_both(t_stack **a, t_stack **b,
+						t_stack *cheapest_node);
 
 #endif

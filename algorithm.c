@@ -18,10 +18,11 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 
 	if (!stack_a || !stack_b)
 		return ;
-	if (isSorted(*stack_a) || stack_len(*stack_a) == 1 || stack_len(*stack_a) == 0)
+	if (isSorted(*stack_a) || stack_len(*stack_a) == 1
+		|| stack_len(*stack_a) == 0)
 		return ;
 	stackNodes = stack_len(*stack_a);
-	if (stackNodes == 2) 
+	if (stackNodes == 2)
 		sa(stack_a);
 	else if (stackNodes == 3)
 		sort_three(stack_a);
@@ -29,22 +30,19 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_stacks(stack_a, stack_b);
 }
 
-void sort_three(t_stack **a)
+void	sort_three(t_stack **a)
 {
-    if (!a || !(*a) || !((*a)->next) || !((*a)->next->next))
-        return;
-    if (isSorted(*a))
-        return;
-    t_stack *biggest_node = find_max(*a);
-    if (*a == biggest_node)
-        ra(a);
-    else if ((*a)->next == biggest_node)
-        rra(a);
-    if ((*a)->data > (*a)->next->data)
-        sa(a);
+	t_stack	*biggest_node;
+
+	if (!a || !(*a) || !((*a)->next) || !((*a)->next->next))
+		return ;
+	if (isSorted(*a))
+		return ;
+	biggest_node = find_max(*a);
+	if (*a == biggest_node)
+		ra(a);
+	else if ((*a)->next == biggest_node)
+		rra(a);
+	if ((*a)->data > (*a)->next->data)
+		sa(a);
 }
-
-
-
-
-
