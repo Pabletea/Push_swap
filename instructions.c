@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:06:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 15:21:31 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:28:50 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,26 +124,34 @@ void	pb(t_stack **b, t_stack **a) //Push on top of `a`, the top `b` and print th
 	ft_printf(1,"pb\n");
 }
 
-static void	rev_rotate(t_stack **stack) //Define a funtion that rotates a stack's bottom node, to the top
+static void rev_rotate(t_stack **stack)
 {
-	t_stack	*last; //To store the pointer to the last node
+	t_stack	*head;
+	t_stack	*tail;
 
-	if (!*stack || !(*stack)->next) //Check if the stack is empty, or if there's one node
+	if (stack_len(*stack) < 2)
 		return ;
-	last = find_last(*stack);
-	last->prev->next = NULL; //Assign to the `next` attribute of the node before itself, `NULL` effectively setting it as the current last node
-	last->next = *stack; //Assign to its own `next` attribute as the top node of the stack
-	last->prev = NULL; //Detach itself from the node before it
-	*stack = last;  //Complete appending itself to the top of the stack, and now holds the pointer to the top node
-	last->next->prev = last; //Update the current last node of the stack
+	head = *stack;
+	tail = ft_lstlast(head);
+	while (head)
+	{
+		if (head->next->next == NULL)
+		{
+			 head->next = NULL;
+			 break ;
+		}
+		head = head->next;
+	}
+	tail->next = *stack;
+	*stack = tail;              // Update head pointer to the last node
 }
 
-void	rra(t_stack **a) //Rotate the bottom of `a` to the top of the stack and print the instruction
+
+void rra(t_stack **a)
 {
-	rev_rotate(a);
+    rev_rotate(a);
 	ft_printf(1,"rra\n");
 }
-
 void	rrb(t_stack **b) //Rotate the bottom of `b` to the top of the stack and print the instruction
 {
 	rev_rotate(b);
@@ -155,4 +163,26 @@ void	rrr(t_stack **a, t_stack **b) //Stimultaneously rotate both stacks' bottom 
 	rev_rotate(a);
 	rev_rotate(b);
 	ft_printf(1,"rrr\n");
+}
+
+void	rotate_both(t_stack **a,
+						t_stack **b,
+						t_stack *cheapest_node) //Define a function that rotates both the top `a` and `b` nodes to the bottom of their stacks, if it's the cheapest move
+{
+	while (*b != cheapest_node->target_node
+		&& *a != cheapest_node) //As long as the current `b` node is not `a` cheapest node's target node, and the current top `a` node is not the top node
+		rr(a, b);
+	current_index(*a);
+	current_index(*b);
+}
+
+void	rev_rotate_both(t_stack **a,
+								t_stack **b,
+								t_stack *cheapest_node) //Define a function that rotates both the bottom `a` and `b` nodes to the top of their stacks, if it's the cheapest move
+{
+	while (*b != cheapest_node->target_node
+		&& *a != cheapest_node) //As long as the current `b` node is not `a` cheapest node's target node && and the current `a` node is not the cheapest
+		rrr(a, b); //Reverse rotate both `a` and `b` nodes
+	current_index(*a); //Refresh current node positions
+	current_index(*b);
 }

@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 14:08:51 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:29:43 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	init_nodes_b(t_stack *a, t_stack *b);
 
 /*------------------------LIST UTILS--------------------*/
 t_stack	*find_last(t_stack *stack);
+t_stack	*ft_lstlast(t_stack *head);
 
 /*------------------------ALGORITHM-------------------*/
 
@@ -88,4 +89,15 @@ void	sort_three(t_stack **a);
 void				sort_four(t_stack **stack_a, t_stack **stack_b);
 void				sort_five(t_stack **stack_a, t_stack **stack_b);
 void	sort_stacks(t_stack **a, t_stack **b);
+
+
+void	rotate_both(t_stack **a,
+						t_stack **b,
+						t_stack *cheapest_node);
+
+
+void	rev_rotate_both(t_stack **a,
+								t_stack **b,
+								t_stack *cheapest_node);
+
 #endif

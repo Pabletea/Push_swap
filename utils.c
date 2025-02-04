@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:58 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 14:00:59 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:24:55 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,16 +131,16 @@ int	getRange(t_stack **stack, int value)
 	return (-1); // Or any appropriate value to indicate value not found
 }
 
-void	free_stack(t_stack *stack)
+void free_stack(t_stack *stack)
 {
-	t_stack	*temp;
-
-	while (stack)
-	{
-		temp = stack->next;
-		free(stack);
-		stack = temp;
-	}
+    t_stack *temp;
+    while (stack)
+    {
+        temp = stack->next;
+        // If there are any additional allocated members, free them here.
+        free(stack);
+        stack = temp;
+    }
 }
 
 t_stack	*create_node(int data, int index)

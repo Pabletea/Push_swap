@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 15:00:47 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:30:14 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,32 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_stacks(stack_a, stack_b);
 }
 
-void	sort_three(t_stack **a)
+void sort_three(t_stack **a)
 {
-	t_stack	*biggest_node; //To store a pointer to the biggest node in stack `a`
+    // Validate that the pointer and list are non-null and have at least three nodes.
+    if (!a || !(*a) || !((*a)->next) || !((*a)->next->next))
+        return;
+	
+    // Early exit if the stack is already sorted.
+    if (isSorted(*a))
+        return;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a) //Check if the current node is the biggest
-		ra(a); //If so, rotate the top node to the bottom of the stack
-	else if ((*a)->next == biggest_node) //Check if the second node is the biggest
-		rra(a); //If so, reverse rotate the bottom node, to the top of the stack
-	if ((*a)->data > (*a)->next->data) //Check if the bottom node is the biggest, but the top node is higher than the second node
-		sa(a); //If so, simply swap the top and second nodes
+    // Find the biggest node in the stack.
+    t_stack *biggest_node = find_max(*a);
 
+    // If the biggest node is at the top, rotate it to the bottom.
+    if (*a == biggest_node)
+        ra(a);
+    // If the biggest node is in the middle, perform a reverse rotate.
+    else if ((*a)->next == biggest_node)
+        rra(a);
+
+    // Finally, if the top two elements are out of order, swap them.
+    if ((*a)->data > (*a)->next->data)
+        sa(a);
 }
+
+
 
 
 
