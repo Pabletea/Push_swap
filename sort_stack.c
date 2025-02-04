@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:04:48 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 15:34:12 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:41:56 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,6 @@ void	sort_stacks(t_stack **a, t_stack **b)
 		init_nodes_a(*a, *b);
 		move_a_to_b(a, b);
 	}
-    imprimir_estado(a,b);
-    sleep(5);
-    printf("..............\n");
-    sleep(1);
 	sort_three(a);
 	while (*b) //Until the end of stack `b` is reached
 	{
@@ -94,6 +90,4 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	}
 	current_index(*a);
 	min_on_top(a);
-    imprimir_estado(a,b);
-    sleep(4);
 }
