@@ -1,11 +1,14 @@
 NAME = push_swap
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 LIBFT_DIR = ft_libft
 PRINTF_DIR = ft_printf
 LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/libftprintf.a
-SRCS = $(wildcard *.c)
+SRCS =	push_swap.c algorithm.c init_nodes_a.c init_nodes_b.c \
+				instructions.c list_utils.c push.c rev_rotate.c \
+				rotate.c sort_stack.c stack_utils.c swap.c utils.c \
+				utils_2.c utils_3.c 
 OBJS = $(SRCS:.c=.o)
 
 
