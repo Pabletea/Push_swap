@@ -5,7 +5,7 @@
 *.o
 .*a
 .*txt
-.*sh
+*.sh
 *.dylib
 *.vscode
 push_swap.exe
