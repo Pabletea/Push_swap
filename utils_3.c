@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 09:54:13 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/05 12:04:04 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:19:17 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ t_stack	*create_node(int data, int index)
 	new_node->data = data;
 	new_node->index = index;
 	new_node->next = NULL;
+	new_node->is_cheapiest = 0;  // Initialize to 0 (false)
+	new_node->above_median = 0;  // Initialize to 0 (false)
+	new_node->target_node = NULL; // Prevent undefined behavior
 	return (new_node);
 }
 
