@@ -3,11 +3,11 @@
 *.dll
 *.so
 *.o
-.*a
-.*txt
+*.a
+*.txt
 *.sh
 *.dylib
 *.vscode
+*.log
 push_swap.exe
 /push_swap_tester
-*.txt
