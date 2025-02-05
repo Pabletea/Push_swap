@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_printf_str(int fd,char *str)
+int	ft_printf_str(int fd, char *str)
 {
 	if (!str)
 	{

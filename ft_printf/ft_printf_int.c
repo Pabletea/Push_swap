@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_printf_int(int fd,int i)
+int	ft_printf_int(int fd, int i)
 {
 	ft_putnbr_fd(i, fd);
 	return (int_len(i));

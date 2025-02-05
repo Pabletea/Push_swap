@@ -19,19 +19,19 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int		ft_printf(int fd,char const *format, ...);
+int		ft_printf(int fd, char const *format, ...);
 int		int_len(int n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 size_t	ft_strlen(const char *str);
-int		ft_printf_char(int fd,char c);
-int		ft_printf_str(int fd,char *str);
-int		ft_printf_int(int fd,int i);
-int		ft_printf_unsigned_int(int fd,unsigned int n);
-int		ft_print_hex_lower(int fd,unsigned int num);
-int		ft_print_hex_upper(int fd,unsigned int num);
-int		ft_print_hex(int fd,unsigned int num, char format);
-int		ft_printf_pointer(int fd,void *ptr);
+int		ft_printf_char(int fd, char c);
+int		ft_printf_str(int fd, char *str);
+int		ft_printf_int(int fd, int i);
+int		ft_printf_unsigned_int(int fd, unsigned int n);
+int		ft_print_hex_lower(int fd, unsigned int num);
+int		ft_print_hex_upper(int fd, unsigned int num);
+int		ft_print_hex(int fd, unsigned int num, char format);
+int		ft_printf_pointer(int fd, void *ptr);
 
 #endif

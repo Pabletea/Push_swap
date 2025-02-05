@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-int	ft_print_hex_lower(int fd,unsigned int num);
-int	ft_print_hex_upper(int fd,unsigned int num);
+int	ft_print_hex_lower(int fd, unsigned int num);
+int	ft_print_hex_upper(int fd, unsigned int num);
 
-int	ft_print_hex(int fd,unsigned int num, char format)
+int	ft_print_hex(int fd, unsigned int num, char format)
 {
 	if (format == 'X')
-		return (ft_print_hex_upper(fd,num));
+		return (ft_print_hex_upper(fd, num));
 	else
-		return (ft_print_hex_lower(fd,num));
+		return (ft_print_hex_lower(fd, num));
 }
 
-int	ft_print_hex_lower(int fd,unsigned int num)
+int	ft_print_hex_lower(int fd, unsigned int num)
 {
 	char	*hex_digits;
 	char	buffer[9];
@@ -49,7 +49,7 @@ int	ft_print_hex_lower(int fd,unsigned int num)
 	return (char_count);
 }
 
-int	ft_print_hex_upper(int fd,unsigned int num)
+int	ft_print_hex_upper(int fd, unsigned int num)
 {
 	char	*hex_digits;
 	char	buffer[9];

@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 23:17:50 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:52:26 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 
 	if (!stack_a || !stack_b)
 		return ;
-	if (isSorted(*stack_a) || stack_len(*stack_a) == 1
+	if (is_sorted(*stack_a) || stack_len(*stack_a) == 1
 		|| stack_len(*stack_a) == 0)
 		return ;
 	stack_nodes = stack_len(*stack_a);
@@ -36,7 +36,7 @@ void	sort_three(t_stack **a)
 
 	if (!a || !(*a) || !((*a)->next) || !((*a)->next->next))
 		return ;
-	if (isSorted(*a))
+	if (is_sorted(*a))
 		return ;
 	biggest_node = find_max(*a);
 	if (*a == biggest_node)

@@ -6,13 +6,12 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 23:16:12 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:32:19 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			*validate_input(int argc, char *argv[], int *stack_values);
 void		getValues(int ar, char *av[]);
 static void	free_all_memory(char *argv_union, char **arr_arguments);
 static int	check_arguments(char **argv);
@@ -51,10 +50,10 @@ int	main(int argc, char *argv[])
 		stack_values[i] = ft_atoi(valores_argumentos[i]);
 		i++;
 	}
-	initializeStack(stack_a, stack_values, size);
+	initialize_stack(stack_a, stack_values, size);
 	if (stack_values != NULL)
 	{
-		if (isSorted(*stack_a))
+		if (is_sorted(*stack_a))
 		{
 			free_stack(*stack_a);
 			free_stack(*stack_b);
@@ -63,9 +62,7 @@ int	main(int argc, char *argv[])
 			return (0);
 		}
 		else
-		{
 			sort_stack(stack_a, stack_b);
-		}
 	}
 	else
 	{
@@ -77,76 +74,6 @@ int	main(int argc, char *argv[])
 	free(stack_a);
 	free(stack_b);
 	return (0);
-}
-
-int	*validate_input(int argc, char *argv[], int *stack_values)
-{
-	int		i;
-	int		j;
-	int		z;
-	int		string_check;
-	int		*seen_numbers;
-	int		seen_count;
-	long	number;
-
-	seen_count = 0;
-	if (argc <= 2)
-		return (NULL);
-	seen_numbers = (int *)calloc((argc - 1), sizeof(int));
-	if (!seen_numbers)
-		return (NULL);
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		string_check = 1;
-		while (argv[i][j])
-		{
-			if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0)
-			{
-				j++;
-				if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-				{
-					string_check = 0;
-					break ;
-				}
-			}
-			else if (argv[i][j] >= '0' && argv[i][j] <= '9')
-				j++;
-			else
-			{
-				string_check = 0;
-				break ;
-			}
-		}
-		if (string_check == 0)
-		{
-			free(seen_numbers);
-			return (NULL);
-		}
-		number = ft_atoi(argv[i]);
-		if (number > 2147483647 || number < -2147483647)
-		{
-			free(seen_numbers);
-			return (NULL);
-		}
-		z = 0;
-		while (z < seen_count)
-		{
-			if (seen_numbers[z] == number)
-			{
-				free(seen_numbers);
-				return (NULL);
-			}
-			z++;
-		}
-		seen_numbers[seen_count] = (int)number;
-		stack_values[i - 1] = (int)number;
-		seen_count++;
-		i++;
-	}
-	free(seen_numbers);
-	return (stack_values);
 }
 
 static int	check_arguments(char **argv)
@@ -185,7 +112,3 @@ static void	free_all_memory(char *argv_union, char **arr_arguments)
 	}
 	free(arr_arguments);
 }
-
-// 		}
-// 	}
-// }

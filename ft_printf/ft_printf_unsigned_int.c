@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_printf_unsigned_int(int fd,unsigned int num)
+int	ft_printf_unsigned_int(int fd, unsigned int num)
 {
 	char	buffer[10];
 	int		i;

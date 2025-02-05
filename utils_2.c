@@ -67,7 +67,7 @@ int	is_valid_integer_value(char *str)
 
 {
 	long num;
-	long    check_num;
+	long check_num;
 
 	num = ft_atoi(str);
 	check_num = ft_atol(str);

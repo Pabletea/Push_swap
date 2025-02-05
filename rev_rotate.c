@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_char.c                                   :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 10:02:55 by pabalons          #+#    #+#             */
-/*   Updated: 2025/01/03 13:04:54 by pabalons         ###   ########.fr       */
+/*   Created: 2025/02/05 10:14:31 by pabalons          #+#    #+#             */
+/*   Updated: 2025/02/05 10:15:32 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "push_swap.h"
 
-int	ft_printf_char(int fd, char c)
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-	return (write(fd, &c, 1));
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
+		rr(a, b);
+	current_index(*a);
+	current_index(*b);
+}
+
+void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+{
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
+		rrr(a, b);
+	current_index(*a);
+	current_index(*b);
 }

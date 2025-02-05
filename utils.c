@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:58 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 23:26:08 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:54:41 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	stack_len(t_stack *stack)
 	return (count);
 }
 
-void	initializeStack(t_stack **stack, int *stack_values, int nValues)
+void	initialize_stack(t_stack **stack, int *stack_values, int nValues)
 {
 	t_stack	*new_node;
 	t_stack	*current;
@@ -53,7 +53,7 @@ void	initializeStack(t_stack **stack, int *stack_values, int nValues)
 	}
 }
 
-int	isSorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
 	if (!stack)
 		return (1);
@@ -66,7 +66,7 @@ int	isSorted(t_stack *stack)
 	return (1);
 }
 
-int	getLowestNode(t_stack **stack)
+int	get_lowest_node(t_stack **stack)
 {
 	t_stack	*current;
 	int		minimum;
@@ -86,7 +86,7 @@ int	getLowestNode(t_stack **stack)
 	return (minimum);
 }
 
-int	getHighestNode(t_stack **stack)
+int	get_highest_node(t_stack **stack)
 {
 	t_stack	*current;
 	int		maximun;
@@ -104,50 +104,4 @@ int	getHighestNode(t_stack **stack)
 		current = current->next;
 	}
 	return (maximun);
-}
-
-int	getRange(t_stack **stack, int value)
-{
-	t_stack	*current;
-	int		range;
-
-	if (*stack == NULL)
-		return (-1);
-	current = *stack;
-	range = 0;
-	while (current != NULL)
-	{
-		if (current->data == value)
-		{
-			return (range);
-		}
-		range++;
-		current = current->next;
-	}
-	return (-1);
-}
-
-void	free_stack(t_stack *stack)
-{
-	t_stack	*temp;
-
-	while (stack)
-	{
-		temp = stack->next;
-		free(stack);
-		stack = temp;
-	}
-}
-
-t_stack	*create_node(int data, int index)
-{
-	t_stack	*new_node;
-
-	new_node = (t_stack *)malloc(sizeof(t_stack));
-	if (!new_node)
-		return (NULL);
-	new_node->data = data;
-	new_node->index = index;
-	new_node->next = NULL;
-	return (new_node);
 }

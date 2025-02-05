@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 09:30:21 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 23:00:53 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:52:55 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void				rrb(t_stack **b);
 void				rrr(t_stack **a, t_stack **b);
 
 int					stack_len(t_stack *stack);
-void				initializeStack(t_stack **stack, int *stackValues,
+void				initialize_stack(t_stack **stack, int *stackValues,
 						int nValues);
 void				imprimir_estado(t_stack **a, t_stack **b);
-int					isSorted(t_stack *stack);
-int					getHighestNode(t_stack **stack);
-int					getLowestNode(t_stack **stack);
+int					is_sorted(t_stack *stack);
+int					get_highest_node(t_stack **stack);
+int					get_lowest_node(t_stack **stack);
 void				sort_stack(t_stack **stack_a, t_stack **stack_b);
-int					getRange(t_stack **stack, int value);
+int					get_range(t_stack **stack, int value);
 void				free_stack(t_stack *stack);
 void				imprimir_node(t_stack *node);
 t_stack				*find_min(t_stack *stack);

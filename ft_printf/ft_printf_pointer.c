@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static void	print_hex(int fd,unsigned long num);
+static void	print_hex(int fd, unsigned long num);
 
-int	ft_printf_pointer(int fd,void *ptr)
+int	ft_printf_pointer(int fd, void *ptr)
 {
 	int				count;
 	unsigned long	address;
@@ -25,7 +25,7 @@ int	ft_printf_pointer(int fd,void *ptr)
 		write(1, "(nil)", 5);
 		return (5);
 	}
-	print_hex(fd,(unsigned long)ptr);
+	print_hex(fd, (unsigned long)ptr);
 	address = (unsigned long)ptr;
 	while (address != 0)
 	{
@@ -35,7 +35,7 @@ int	ft_printf_pointer(int fd,void *ptr)
 	return (count + 2);
 }
 
-static void	print_hex(int fd,unsigned long num)
+static void	print_hex(int fd, unsigned long num)
 {
 	const char	*hex_digits = "0123456789abcdef";
 	char		buffer[16];
