@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:56:40 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/04 23:19:36 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:44:08 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ int	is_valid_number(char *str)
 }
 
 int	is_valid_integer_value(char *str)
-
 {
-	long num;
-	long check_num;
+	long	num;
+	long	check_num;
 
 	num = ft_atoi(str);
 	check_num = ft_atol(str);
