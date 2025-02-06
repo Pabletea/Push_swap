@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 09:54:13 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/05 14:59:57 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:24:32 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	check_arguments(char **argv)
 
 	i = 0;
 	if (!argv[i])
-		return (ft_printf(2, "Error: No arguments provided\n"), 0);
+		return (ft_printf(2, "Error\n"), 0);
 	while (argv[i])
 	{
 		if (!is_valid_number(argv[i]))
 		{
-			ft_printf(2, "Error: incorrect arguments\n");
+			ft_printf(2, "Error\n");
 			return (0);
 		}
 		i++;

@@ -8,7 +8,7 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 SRCS =	push_swap.c algorithm.c init_nodes_a.c init_nodes_b.c \
 				instructions.c list_utils.c push.c rev_rotate.c \
 				rotate.c sort_stack.c stack_utils.c swap.c utils.c \
-				utils_2.c utils_3.c 
+				utils_2.c utils_3.c utils_4.c
 OBJS = $(SRCS:.c=.o)
 
 

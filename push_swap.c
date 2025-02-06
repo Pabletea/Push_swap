@@ -6,14 +6,15 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:54:59 by pabalons          #+#    #+#             */
-/*   Updated: 2025/02/05 12:02:59 by pabalons         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:33:25 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			process_arguments(char *mega_argv, t_stack **stack_a,
-				t_stack **stack_b);
+int		process_arguments(char *mega_argv, t_stack **stack_a,
+			t_stack **stack_b);
+void	print_stack(t_stack *stack);
 
 int	main(int argc, char *argv[])
 {
@@ -83,6 +84,12 @@ int	parse_and_validate(char *mega_argv, char ***valores_argumentos,
 		return (0);
 	convert_arguments_to_int(*valores_argumentos, *stack_values, size);
 	free_all_memory(mega_argv, *valores_argumentos);
+	if (check_duplicates(*stack_values, size))
+	{
+		ft_printf(2, "Error\n");
+		free(*stack_values);
+		return (0);
+	}
 	return (size);
 }
 
