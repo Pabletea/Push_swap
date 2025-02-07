@@ -113,5 +113,4 @@ Sorting visualization:
 ## Author 
 
 **Pablo Alonso García**
-![image](https://github.com/user-attachments/assets/aad6f921-cdfa-4cec-b924-3923271f82ca)
 ---
