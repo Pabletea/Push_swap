@@ -9,11 +9,11 @@
 
 ## 📖 Contents
 
-- [Features](#Features)
-- [Project Structure](#projectstructure)
+- [Features](#features)
+- [Project Structure](#project-structure)
 - [Requirements](#requirements)
 - [Compilation](#compilation)
-- [Allowed Instructions](#allowedinstructions)
+- [Allowed Instructions](#allowed-instructions)
 - [Author](#author)
 
 ---
