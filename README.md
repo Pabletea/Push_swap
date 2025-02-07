@@ -9,7 +9,7 @@
 
 ## 📖 Contents
 
-- [Features](#features)
+- [Features](#Features)
 - [Requirements](#requirements)
 - [Compilation](#compilation)
 - [Allowed Instructions](#allowedinstructions)
