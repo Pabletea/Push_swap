@@ -112,5 +112,5 @@ Sorting visualization:
 ---
 ## Author 
 
-**Pablo Alonso García**
+***Pablo Alonso García***
 ---
