@@ -10,6 +10,7 @@
 ## 📖 Contents
 
 - [Features](#Features)
+- [Project Structure](#ProjectStructure)
 - [Requirements](#requirements)
 - [Compilation](#compilation)
 - [Allowed Instructions](#allowedinstructions)
